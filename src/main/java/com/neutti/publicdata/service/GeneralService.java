@@ -20,6 +20,7 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,17 +44,15 @@ public class GeneralService {
         }else {
             resultType = "xml";
         }
-        String getUrl = url + "?serviceKey=" + serviceKey + "&resultType=" + resultType + "&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
+        String getUrl = url + "?serviceKey=" + URLEncoder.encode(serviceKey, "UTF-8") + "&resultType=" + resultType + "&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
 
         if(etcParam != null){
             List<String> keyList = new ArrayList<>(etcParam.keySet());
 
             for (String key : keyList) {
-                getUrl += "&" + key + "=" + etcParam.get(key);
+                getUrl += "&" + key + "=" + URLEncoder.encode(etcParam.get(key).toString(), "UTF-8");
             }
         }
-
-
 
         URL targetUrl = new URL(getUrl);
         HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
@@ -82,7 +81,6 @@ public class GeneralService {
             }
 
             mapArray = new Gson().fromJson(itemsArray, HashMap[].class);
-            mapArray = CommonUtil.convertKeysToCamelCase(mapArray);
 
         } else {
             try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());) {
@@ -121,10 +119,11 @@ public class GeneralService {
 
                 }
 
-                //System.out.println("values: " + values.toString());
-
-
             }
+        }
+
+        if(param.getIsCamelCase()){
+            mapArray = CommonUtil.convertKeysToCamelCase(mapArray);
         }
 
         return mapArray;

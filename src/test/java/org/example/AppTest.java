@@ -30,6 +30,7 @@ public class AppTest
             HashMap<String, Object> etcParam = new HashMap<String, Object>();
             etcParam.put("instit_nm", "동아대학교병원");
             paramVO.setEtcParam(etcParam);
+            paramVO.setIsCamelCase(true);
 
             HashMap<String, Object>[] rtrnMapArray = service.retrieveData(paramVO);
             for(HashMap<String, Object> dataMap : rtrnMapArray){

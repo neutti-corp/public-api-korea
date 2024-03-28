@@ -19,6 +19,7 @@ public class CommonUtil {
         for (int i = 1; i < parts.length; i++) {
             camelCaseString.append(parts[i].substring(0, 1).toUpperCase()).append(parts[i].substring(1).toLowerCase());
         }
-        return camelCaseString.toString();
+        String rtrnString = camelCaseString.toString().substring(0, 1).toLowerCase() + camelCaseString.toString().substring(1);
+        return rtrnString;
     }
 }
