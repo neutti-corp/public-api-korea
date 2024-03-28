@@ -79,6 +79,7 @@
         <executions>
           <execution>
             <id>attach-sources</id>
+            <phase>package</phase>
             <goals>
               <goal>jar</goal>
             </goals>
@@ -94,6 +95,7 @@
         <executions>
           <execution>
             <id>attach-javadocs</id>
+            <phase>package</phase>
             <goals>
               <goal>jar</goal>
             </goals>
@@ -105,7 +107,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>1.6</version>
         <executions>
           <execution>
             <id>sign-artifacts</id>
@@ -116,7 +118,11 @@
           </execution>
         </executions>
         <configuration>
+          <passphraseServerId>gpg.passphrase</passphraseServerId>
           <gpgArguments>
+            <arg>--batch</arg>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
             <arg>--default-key</arg>
             <arg>C1CD508AE3EC7019512309F45B6B728861CCA316</arg>
           </gpgArguments>

@@ -5,18 +5,13 @@ import com.google.gson.stream.JsonReader;
 import com.neutti.publicdata.CommonUtil;
 import com.neutti.publicdata.vo.ParamVO;
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import javax.xml.bind.Element;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;

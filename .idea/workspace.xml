@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="988a7074-9cf7-4e8b-a2a0-331ea14d5194" name="Changes" comment="init commit">
+    <list default="true" id="988a7074-9cf7-4e8b-a2a0-331ea14d5194" name="Changes" comment="maven deploy 설정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/neutti/publicdata/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +43,7 @@
     "Maven.neutti-publicdata-library [install].executor": "Run",
     "Maven.neutti-publicdata-library [package].executor": "Run",
     "Maven.neutti-publicdata-library [test].executor": "Run",
+    "Maven.neutti-publicdata-library [validate].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -72,7 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1711500738860</updated>
       <workItem from="1711500739889" duration="42000" />
-      <workItem from="1711500798207" duration="36165000" />
+      <workItem from="1711500798207" duration="44377000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -82,7 +83,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711544473442</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="maven deploy 설정">
+      <option name="closed" value="true" />
+      <created>1711603082534</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711603082534</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,6 +99,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="init commit" />
+    <MESSAGE value="maven deploy 설정" />
+    <option name="LAST_COMMIT_MESSAGE" value="maven deploy 설정" />
   </component>
 </project>
