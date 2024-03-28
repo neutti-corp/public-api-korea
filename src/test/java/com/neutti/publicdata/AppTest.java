@@ -1,12 +1,8 @@
-package org.example;
+package com.neutti.publicdata;
 
 import com.neutti.publicdata.service.GeneralService;
-import com.neutti.publicdata.service.JsonService;
-import com.neutti.publicdata.vo.HospitalVO;
 import com.neutti.publicdata.vo.ParamVO;
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import java.util.HashMap;
 

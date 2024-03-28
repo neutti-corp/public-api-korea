@@ -7,10 +7,7 @@
     <list default="true" id="988a7074-9cf7-4e8b-a2a0-331ea14d5194" name="Changes" comment="init commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/CommonUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/vo/ParamVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/vo/ParamVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/neutti/publicdata/AppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +40,7 @@
     "Maven.neutti-publicdata-library [clean].executor": "Run",
     "Maven.neutti-publicdata-library [compile].executor": "Run",
     "Maven.neutti-publicdata-library [deploy].executor": "Run",
+    "Maven.neutti-publicdata-library [install].executor": "Run",
     "Maven.neutti-publicdata-library [package].executor": "Run",
     "Maven.neutti-publicdata-library [test].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -74,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1711500738860</updated>
       <workItem from="1711500739889" duration="42000" />
-      <workItem from="1711500798207" duration="34856000" />
+      <workItem from="1711500798207" duration="36165000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />

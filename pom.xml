@@ -25,6 +25,12 @@
 
   <description>could use publicdata in Korea more conveniently</description>
 
+  <scm>
+    <url>https://github.com/neutti-corp/neutti-publicdata-library</url>
+    <connection>scm:git:git://github.com/neutti-corp/neutti-publicdata-library.git</connection>
+    <developerConnection>scm:git:ssh://github.com:neutti-corp/neutti-publicdata-library.git</developerConnection>
+  </scm>
+
   <name>neutti-publicdata-library</name>
   <url>http://maven.apache.org</url>
 
@@ -109,6 +115,12 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <gpgArguments>
+            <arg>--default-key</arg>
+            <arg>C1CD508AE3EC7019512309F45B6B728861CCA316</arg>
+          </gpgArguments>
+        </configuration>
       </plugin>
 
     </plugins>
