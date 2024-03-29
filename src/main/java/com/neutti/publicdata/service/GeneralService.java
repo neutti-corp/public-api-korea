@@ -34,6 +34,8 @@ public class GeneralService {
         int numOfRows = param.getNumOfRows();
         HashMap<String, Object> etcParam = param.getEtcParam();
 
+        serviceKey = CommonUtil.ensureDecoded(serviceKey);
+
         if(isJson){
             resultType = "json";
         }else {

@@ -14,8 +14,8 @@ public class AppTest
 {
     public void testSomething() {
         GeneralService service = new GeneralService();
-        String url = "https://apis.data.go.kr/6260000/MedicInstitService/MedicalInstitInfo";
-        String serviceKey = "maQN9ERlzOBZfcjIu1K8huRRCi+YhF++eEy+tnCMTi3QGADZlvLzq/YgO2t3O95nzI5MGT5dkNmx03gEAnzqyA==";
+        String url = "http://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList";
+        String serviceKey = "maQN9ERlzOBZfcjIu1K8huRRCi%2BYhF%2B%2BeEy%2BtnCMTi3QGADZlvLzq%2FYgO2t3O95nzI5MGT5dkNmx03gEAnzqyA%3D%3D";
         try {
             ParamVO paramVO = new ParamVO();
             paramVO.setUrl(url);
@@ -25,7 +25,7 @@ public class AppTest
             paramVO.setNumOfRows(20);
             HashMap<String, Object> etcParam = new HashMap<String, Object>();
             etcParam.put("instit_nm", "동아대학교병원");
-            paramVO.setEtcParam(etcParam);
+//            paramVO.setEtcParam(etcParam);
             paramVO.setIsCamelCase(true);
 
             HashMap<String, Object>[] rtrnMapArray = service.retrieveData(paramVO);

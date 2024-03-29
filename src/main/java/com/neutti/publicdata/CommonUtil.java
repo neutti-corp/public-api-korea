@@ -1,5 +1,7 @@
 package com.neutti.publicdata;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -21,5 +23,25 @@ public class CommonUtil {
         }
         String rtrnString = camelCaseString.toString().substring(0, 1).toLowerCase() + camelCaseString.toString().substring(1);
         return rtrnString;
+    }
+
+    public static String ensureDecoded(String input) {
+
+        String withPlaceholder = input.replace("+", "%2B");
+        String decoded;
+        try {
+            // Try decoding
+            decoded = URLDecoder.decode(withPlaceholder, StandardCharsets.UTF_8.toString());
+
+            // If the decoded string is different from the original, the original was encoded
+            if (!decoded.equals(input)) {
+                return decoded; // The input was encoded, return decoded
+            }
+        } catch (Exception e) {
+            // Handle potential exception, for example, if the decoding fails
+            e.printStackTrace();
+        }
+        // If decoding did not change the string, it was not encoded
+        return input; // The input was not encoded, return original
     }
 }
