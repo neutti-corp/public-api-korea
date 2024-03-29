@@ -2,7 +2,7 @@ package com.neutti.publicdata.service;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
-import com.neutti.publicdata.CommonUtil;
+import com.neutti.publicdata.helper.NHelper;
 import com.neutti.publicdata.vo.ParamVO;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -34,7 +34,7 @@ public class GeneralService {
         int numOfRows = param.getNumOfRows();
         HashMap<String, Object> etcParam = param.getEtcParam();
 
-        serviceKey = CommonUtil.ensureDecoded(serviceKey);
+        serviceKey = NHelper.ensureDecoded(serviceKey);
 
         if(isJson){
             resultType = "json";
@@ -120,7 +120,7 @@ public class GeneralService {
         }
 
         if(param.getIsCamelCase()){
-            mapArray = CommonUtil.convertKeysToCamelCase(mapArray);
+            mapArray = NHelper.convertKeysToCamelCase(mapArray);
         }
 
         return mapArray;
