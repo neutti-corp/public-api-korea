@@ -14,7 +14,7 @@ public class AppTest
 {
     public void testSomething() {
         GeneralService service = new GeneralService();
-        String url = "http://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList";
+        String url = "https://openapi.gg.go.kr/Animalhosptl";
         String serviceKey = "maQN9ERlzOBZfcjIu1K8huRRCi%2BYhF%2B%2BeEy%2BtnCMTi3QGADZlvLzq%2FYgO2t3O95nzI5MGT5dkNmx03gEAnzqyA%3D%3D";
         try {
             ParamVO paramVO = new ParamVO();

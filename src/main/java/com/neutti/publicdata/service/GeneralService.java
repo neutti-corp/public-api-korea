@@ -95,6 +95,10 @@ public class GeneralService {
                 Document xml = convertStringToDocument(xmlString);
 
                 NodeList childs = xml.getElementsByTagName("item");
+                if(childs.getLength() == 0){
+                    childs = xml.getElementsByTagName("row");
+                }
+
                 Node child;
                 Node grandChild;
                 mapArray =  new HashMap[childs.getLength()];
@@ -141,5 +145,9 @@ public class GeneralService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private NodeList getNodeListFromDocument(Document document){
+        return document.getElementsByTagName("item");
     }
 }
