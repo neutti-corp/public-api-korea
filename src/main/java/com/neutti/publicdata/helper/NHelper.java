@@ -1,13 +1,13 @@
-package com.neutti.publicdata;
+package com.neutti.publicdata.helper;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class CommonUtil {
+public class NHelper {
 
-    public static HashMap<String, Object>[] convertKeysToCamelCase(HashMap<String, Object>[] maps) {
+    public static HashMap[] convertKeysToCamelCase(HashMap<String, Object>[] maps) {
         return Arrays.stream(maps).map(map -> {
             HashMap<String, Object> newMap = new HashMap<>();
             map.forEach((key, value) -> newMap.put(toCamelCase(key), value));

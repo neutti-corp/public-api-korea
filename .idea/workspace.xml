@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="988a7074-9cf7-4e8b-a2a0-331ea14d5194" name="Changes" comment="encoding, decoding 서비스키 파라미터 구분없이 받을 수 있도록 수정">
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/neutti/publicdata/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/neutti/publicdata/AppTest.java" afterDir="false" />
+    <list default="true" id="988a7074-9cf7-4e8b-a2a0-331ea14d5194" name="Changes" comment="readme.md 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/DataApiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/DataGGApiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/DataSeoulApiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/DataType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/APIPullService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/vo/ResultVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -48,6 +58,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -55,9 +67,17 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.neutti.publicdata" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -74,7 +94,8 @@
       <option name="presentableId" value="Default" />
       <updated>1711500738860</updated>
       <workItem from="1711500739889" duration="42000" />
-      <workItem from="1711500798207" duration="51479000" />
+      <workItem from="1711500798207" duration="50136000" />
+      <workItem from="1711697537481" duration="3177000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -108,15 +129,7 @@
       <option name="project" value="LOCAL" />
       <updated>1711612593946</updated>
     </task>
-    <task id="LOCAL-00005" summary="encoding, decoding 서비스키 파라미터 구분없이 받을 수 있도록 수정">
-      <option name="closed" value="true" />
-      <created>1711680581813</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1711680581813</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,8 +139,7 @@
     <MESSAGE value="init commit" />
     <MESSAGE value="maven deploy 설정" />
     <MESSAGE value="readme.md 추가" />
-    <MESSAGE value="encoding, decoding 서비스키 파라미터 구분없이 받을 수 있도록 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="encoding, decoding 서비스키 파라미터 구분없이 받을 수 있도록 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme.md 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -136,6 +148,21 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java</url>
           <line>45</line>
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
