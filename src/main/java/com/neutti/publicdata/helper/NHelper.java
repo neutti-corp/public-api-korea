@@ -17,8 +17,8 @@ public class NHelper {
 
     private static String toCamelCase(String key) {
         String[] parts = key.split("_");
-        StringBuilder camelCaseString = new StringBuilder(parts[0]);
-        for (int i = 1; i < parts.length; i++) {
+        StringBuilder camelCaseString = new StringBuilder();
+        for (int i = 0; i < parts.length; i++) {
             camelCaseString.append(parts[i].substring(0, 1).toUpperCase()).append(parts[i].substring(1).toLowerCase());
         }
         String rtrnString = camelCaseString.toString().substring(0, 1).toLowerCase() + camelCaseString.toString().substring(1);

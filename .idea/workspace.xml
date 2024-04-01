@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="988a7074-9cf7-4e8b-a2a0-331ea14d5194" name="Changes" comment="readme.md 추가">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/DataApiService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/DataGGApiService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/DataSeoulApiService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/DataType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/APIPullService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/vo/ResultVO.java" afterDir="false" />
+    <list default="true" id="988a7074-9cf7-4e8b-a2a0-331ea14d5194" name="Changes" comment="xml 태그 읽기 로직 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/neutti/publicdata/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/neutti/publicdata/AppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +25,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "sylov27"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="905b979e-9244-444e-8fc5-b60ddcf1af99" />
+        <option name="url" value="git@github.com:neutti-corp/neutti-publicdata-library.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -135,36 +143,33 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init commit" />
     <MESSAGE value="maven deploy 설정" />
     <MESSAGE value="readme.md 추가" />
     <option name="LAST_COMMIT_MESSAGE" value="readme.md 추가" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/neutti/publicdata/service/GeneralService.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/neutti/publicdata/helper/NHelper.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
