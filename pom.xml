@@ -2,9 +2,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.neutti</groupId>
-  <artifactId>neutti-publicdata-library</artifactId>
-  <version>1.0.0</version>
+  <description>could use publicdata in Korea more conveniently</description>
+
+  <groupId>com.neutti.npa</groupId>
+  <artifactId>npa-korea</artifactId>
+  <version>0.0.1</version>
   <packaging>jar</packaging>
 
   <developers>
@@ -12,7 +14,17 @@
       <id>sylov27</id>
       <name>Hyunkook Noh</name>
       <organization>neutti</organization>
+      <organizationUrl>http://neutti.com</organizationUrl>
       <email>sylov28@gmail.com</email>
+      <timezone>-9</timezone>
+    </developer>
+    <developer>
+      <id>parkcs</id>
+      <name>ChanShin Park</name>
+      <email>parkcs@neutti.com</email>
+      <organization>neutti</organization>
+      <organizationUrl>http://neutti.com</organizationUrl>
+      <timezone>-9</timezone>
     </developer>
   </developers>
 
@@ -23,7 +35,6 @@
     </license>
   </licenses>
 
-  <description>could use publicdata in Korea more conveniently</description>
 
   <scm>
     <url>https://github.com/neutti-corp/neutti-publicdata-library</url>
@@ -31,7 +42,7 @@
     <developerConnection>scm:git:ssh://github.com:neutti-corp/neutti-publicdata-library.git</developerConnection>
   </scm>
 
-  <name>neutti-publicdata-library</name>
+  <name>Neutti Public API Korea</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -55,6 +66,11 @@
       <artifactId>lombok</artifactId>
       <version>1.18.24</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>5.2.5</version>
     </dependency>
   </dependencies>
 
