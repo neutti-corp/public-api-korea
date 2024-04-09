@@ -51,77 +51,7 @@ public class GeneralService {
             }
         }
 
-        URL targetUrl = new URL(getUrl);
-        HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
-        conn.setRequestMethod("GET");
-
-        if(isJson){
-            JsonArray itemsArray = new JsonArray();
-
-            try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());
-                 JsonReader jsonReader = new JsonReader(reader)) {
-                jsonReader.setLenient(true);
-                JsonObject jsonObject = JsonParser.parseReader(jsonReader).getAsJsonObject();
-                for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-                    JsonElement bodyElement = entry.getValue().getAsJsonObject().get("body");
-                    if (bodyElement != null && bodyElement.isJsonObject()) {
-                        JsonObject bodyObject = bodyElement.getAsJsonObject();
-                        JsonElement itemsElement = bodyObject.get("items");
-                        if (itemsElement != null && itemsElement.isJsonObject()) {
-                            itemsArray = itemsElement.getAsJsonObject().get("item").getAsJsonArray();
-                            break; // Assuming first matching 'item' array is what you need
-                        }
-                    }
-                }
-            } catch (IllegalStateException e){
-                throw new Exception("You've exceeded API rate limits");
-            }
-
-            mapArray = new Gson().fromJson(itemsArray, HashMap[].class);
-
-        } else {
-            try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());) {
-                StringBuilder xmlData = new StringBuilder();
-                BufferedReader bufferedReader = new BufferedReader(reader);
-
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    xmlData.append(line);
-                }
-
-                String xmlString = xmlData.toString();
-
-                HashMap<String, Object> values = new HashMap<String, Object>();
-                Document xml = convertStringToDocument(xmlString);
-
-                NodeList childs = xml.getElementsByTagName("item");
-                if(childs.getLength() == 0){
-                    childs = xml.getElementsByTagName("row");
-                }
-
-                Node child;
-                Node grandChild;
-                mapArray =  new HashMap[childs.getLength()];
-                for (int i = 0; i < childs.getLength(); i++) {
-                    child = childs.item(i);
-                    NodeList grandChilds = child.getChildNodes();
-                    values = new HashMap<String, Object>();
-                    for (int k = 0; k < grandChilds.getLength(); k++) {
-                        grandChild = grandChilds.item(k);
-                        String key = grandChild.getNodeName().replace("#text", "").replaceAll("(?m)^[ \t]*\r?\n", "");
-                        String value = grandChild.getTextContent().replaceAll("(?m)^[ \t]*\r?\n", "");
-                        if(!"".equals(key)){
-                            values.put(key, value);
-                        }
-
-                    }
-
-                    mapArray[i] = values;
-
-                }
-
-            }
-        }
+        mapArray = NHelper.getHashMapArrayDataFromUrl(getUrl, isJson);
 
         if(param.getIsCamelCase()){
             mapArray = NHelper.convertKeysToCamelCase(mapArray);
@@ -131,23 +61,4 @@ public class GeneralService {
 
     }
 
-
-
-    private static Document convertStringToDocument(String xmlStr) {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try {
-            builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(new InputSource(new StringReader(
-                    xmlStr)));
-            return doc;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private NodeList getNodeListFromDocument(Document document){
-        return document.getElementsByTagName("item");
-    }
 }

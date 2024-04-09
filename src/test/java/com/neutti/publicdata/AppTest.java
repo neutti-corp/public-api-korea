@@ -2,9 +2,13 @@ package com.neutti.publicdata;
 
 import com.neutti.publicdata.service.GeneralService;
 import com.neutti.publicdata.vo.ParamVO;
+import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceParamVO;
+import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultDtlVO;
+import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultVO;
 import junit.framework.TestCase;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Unit test for simple App.
@@ -13,32 +17,27 @@ public class AppTest
     extends TestCase
 {
     public void testSomething() {
-        GeneralService service = new GeneralService();
-        String url = "https://openapi.gg.go.kr/Animalhosptl";
-        String serviceKey = "maQN9ERlzOBZfcjIu1K8huRRCi%2BYhF%2B%2BeEy%2BtnCMTi3QGADZlvLzq%2FYgO2t3O95nzI5MGT5dkNmx03gEAnzqyA%3D%3D";
-        try {
-            ParamVO paramVO = new ParamVO();
-            paramVO.setUrl(url);
-            paramVO.setServiceKey(serviceKey);
-            paramVO.setIsJson(false);
-            paramVO.setPageNo(1);
-            paramVO.setNumOfRows(20);
-            HashMap<String, Object> etcParam = new HashMap<String, Object>();
-            etcParam.put("instit_nm", "동아대학교병원");
-//            paramVO.setEtcParam(etcParam);
-            paramVO.setIsCamelCase(true);
 
-            HashMap<String, Object>[] rtrnMapArray = service.retrieveData(paramVO);
-            for(HashMap<String, Object> dataMap : rtrnMapArray){
-                System.out.println(dataMap.toString());
+        PubliclyAnnouncedLandPriceParamVO param = new PubliclyAnnouncedLandPriceParamVO();
+        param.setKey("A56F212F-B33B-3139-B776-DF93207F4BAC");
+        param.setPnu("1111017700102110000");
+        param.setJson(true);
+
+        DataSpecificApiService service = new DataSpecificApiService();
+        try{
+            PubliclyAnnouncedLandPriceResultVO rtrnVO = service.retrievePubliclyAnnouncedLandPrice(param);
+
+            if(rtrnVO.getResultCode() == null || rtrnVO.getResultCode().isEmpty()){
+                for(PubliclyAnnouncedLandPriceResultDtlVO dataMap : rtrnVO.getDataList()){
+                    System.out.println(dataMap.toString());
+                }
+            }else{
+                System.out.println("resultCode: " + rtrnVO.getResultCode() + ", resultMsg: " + rtrnVO.getResultMsg());
             }
+
         } catch (Exception e){
-          e.printStackTrace();
+            e.printStackTrace();
         }
 
-
-        // Setup
-        // Call the method you want to test
-        // Assert statements to verify the expected outcomes
     }
 }
