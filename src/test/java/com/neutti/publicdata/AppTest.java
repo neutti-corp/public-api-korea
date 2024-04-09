@@ -6,13 +6,14 @@ import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceParamVO;
 import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultDtlVO;
 import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultVO;
 import junit.framework.TestCase;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Unit test for simple App.
  */
+
+@Slf4j
 public class AppTest
     extends TestCase
 {
@@ -29,10 +30,10 @@ public class AppTest
 
             if(rtrnVO.getResultCode() == null || rtrnVO.getResultCode().isEmpty()){
                 for(PubliclyAnnouncedLandPriceResultDtlVO dataMap : rtrnVO.getDataList()){
-                    System.out.println(dataMap.toString());
+                    log.info(dataMap.toString());
                 }
             }else{
-                System.out.println("resultCode: " + rtrnVO.getResultCode() + ", resultMsg: " + rtrnVO.getResultMsg());
+                log.info("resultCode: " + rtrnVO.getResultCode() + ", resultMsg: " + rtrnVO.getResultMsg());
             }
 
         } catch (Exception e){
