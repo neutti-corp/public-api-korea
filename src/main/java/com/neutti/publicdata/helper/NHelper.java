@@ -14,11 +14,9 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class NHelper {
 
@@ -142,62 +140,48 @@ public class NHelper {
 
     }
 
-    public static HashMap<String, Object>[] getHashMapArrayDataFromUrlXml(String url) throws Exception{
+    public static HashMap<String, Object>[] getHashMapArrayDataFromUrlXml(String url) throws Exception {
         URL targetUrl = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
         conn.setRequestMethod("GET");
-        HashMap<String, Object>[] mapArray = null;
-        try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());) {
-            StringBuilder xmlData = new StringBuilder();
-            BufferedReader bufferedReader = new BufferedReader(reader);
 
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                xmlData.append(line);
-            }
+        // Use DocumentBuilderFactory to parse XML
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document xml = dBuilder.parse(conn.getInputStream());
+        xml.getDocumentElement().normalize();
 
-            String xmlString = xmlData.toString();
-            Document xml = convertStringToDocument(xmlString);
+        // Dynamically identify repeating elements (e.g., "City")
+        NodeList nodeList = xml.getDocumentElement().getChildNodes();
+        HashMap<String, Object>[] mapArray = new HashMap[nodeList.getLength()];
 
-            // Dynamically find the first 'array-like' node
-            NodeList firstSignificantNodeList = findFirstSignificantNodeList(xml);
-
-            if(firstSignificantNodeList != null){
-                mapArray = new HashMap[firstSignificantNodeList.getLength()];
-                for (int i = 0; i < firstSignificantNodeList.getLength(); i++) {
-                    Node child = firstSignificantNodeList.item(i);
-                    NodeList grandChilds = child.getChildNodes();
-                    HashMap<String, Object> values = new HashMap<>();
-                    for (int k = 0; k < grandChilds.getLength(); k++) {
-                        Node grandChild = grandChilds.item(k);
-                        String key = grandChild.getNodeName().trim();
-                        String value = grandChild.getTextContent().trim();
-                        values.put(key, value);
-                    }
-                    mapArray[i] = values;
-                }
-            }else{
-                Element root = xml.getDocumentElement();
-
-                // Prepare the HashMap
+        int index = 0;
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element element = (Element) node;
+                NodeList childNodes = element.getChildNodes();
                 HashMap<String, Object> map = new HashMap<>();
-                mapArray = new HashMap[1];
-                // Get all child nodes of the root element
-                NodeList children = root.getChildNodes();
-                for (int i = 0; i < children.getLength(); i++) {
-                    if (children.item(i) instanceof Element) {
-                        Element child = (Element) children.item(i);
-
-                        // Use the tag name as the key and the text content as the value
-                        map.put(child.getTagName(), child.getTextContent());
+                for (int j = 0; j < childNodes.getLength(); j++) {
+                    Node childNode = childNodes.item(j);
+                    if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element childElement = (Element) childNode;
+                        map.put(childElement.getTagName(), childElement.getTextContent());
                     }
                 }
-                mapArray[0]=map;
-
+                if (!map.isEmpty()) {
+                    mapArray[index++] = map;
+                }
             }
-
-
         }
+
+        // Resize the array to match the actual number of elements
+        if (index < nodeList.getLength()) {
+            HashMap<String, Object>[] tempArray = new HashMap[index];
+            System.arraycopy(mapArray, 0, tempArray, 0, index);
+            mapArray = tempArray;
+        }
+
         return mapArray;
     }
 
@@ -281,6 +265,28 @@ public class NHelper {
             }
         }
         return null; // No significant node found
+    }
+
+    public static String settingGetUrl(String url, HashMap<String, Object> param) throws Exception{
+        StringBuilder getUrl = new StringBuilder(url);
+
+        if (param != null && !param.isEmpty()) {
+            getUrl.append("?");
+            List<String> keyList = new ArrayList<>(param.keySet());
+
+            // Use a flag to check if it's the first parameter
+            boolean isFirstParam = true;
+            for (String key : keyList) {
+                if (!isFirstParam) {
+                    // Append "&" only if it's not the first parameter
+                    getUrl.append("&");
+                }
+                // Append the parameter and its encoded value
+                getUrl.append(key).append("=").append(URLEncoder.encode(param.get(key).toString(), "UTF-8").replace("+", "%20"));
+                isFirstParam = false;
+            }
+        }
+        return getUrl.toString();
     }
 
 }

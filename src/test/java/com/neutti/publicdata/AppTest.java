@@ -21,7 +21,8 @@ public class AppTest
 {
     public void testSomething() {
         //retrievePubliclyAnnouncedLandPrice();
-        retrieveGeneralData();
+        //retrieveJsonToMapData();
+        retrieveXmlToMapData2();
     }
 
     // 공시지가 wms 이미지 불러오기
@@ -60,7 +61,7 @@ public class AppTest
         }
     }
 
-    private void retrieveGeneralData() {
+    private void retrieveJsonToMapData() {
         GeneralService service = new GeneralService();
         String url = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON";
         HashMap<String, Object> param = new HashMap<String, Object>();
@@ -79,4 +80,49 @@ public class AppTest
 
 
     }
+
+    private void retrieveXmlToMapData() {
+        GeneralService service = new GeneralService();
+        String url = "https://api.vworld.kr/req/data";
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("service", "data");
+        param.put("request", "GetFeature");
+        param.put("data", "LP_PA_CBND_BUBUN");
+        param.put("version", "2.0");
+        param.put("format","xml");
+        param.put("size", "10");
+        param.put("page", "1");
+        param.put("attrfilter", "pnu:like:11140");
+        param.put("columns", "pnu,jibun,bonbun,bubun,ag_geom,addr,gosi_year,gosi_month,jiga");
+        param.put("geometry", "true");
+        param.put("attribute", "true");
+        param.put("crs", "EPSG:900913");
+        param.put("key", "A56F212F-B33B-3139-B776-DF93207F4BAC");
+        param.put("geomFilter", "LINESTRING(14135552.266976 4518634.8999433,14134863.139393 4518195.3870307)");
+
+        try {
+            HashMap<String, Object>[] rsltList = service.retrieveXmlToMapData(url,param);
+            for(HashMap<String, Object> data : rsltList){
+                log.info(data.toString());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void retrieveXmlToMapData2() {
+        String url = "http://api.sexoffender.go.kr/openapi/SOCitysStats/";
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        GeneralService service = new GeneralService();
+        try {
+            HashMap<String, Object>[] rsltList = service.retrieveXmlToMapData(url,param);
+            for(HashMap<String, Object> data : rsltList){
+                log.info(data.toString());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 }

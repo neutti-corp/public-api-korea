@@ -26,21 +26,9 @@ public class GeneralService {
     public HashMap<String, Object>[] retrieveJsonToMapData(String url, HashMap<String, Object> param) throws Exception {
         HashMap<String, Object>[] mapArray = null;
 
-        String getUrl = url + "?";
-
-        if(param != null){
-            List<String> keyList = new ArrayList<>(param.keySet());
-
-            for (String key : keyList) {
-                getUrl += "&" + key + "=" + URLEncoder.encode(param.get(key).toString(), "UTF-8");
-            }
-        }
+        String getUrl = NHelper.settingGetUrl(url, param);
 
         mapArray = NHelper.getHashMapArrayDataFromUrlJson(getUrl);
-
-//        if(param.getIsCamelCase()){
-//            mapArray = NHelper.convertKeysToCamelCase(mapArray);
-//        }
 
         return mapArray;
 
@@ -49,21 +37,10 @@ public class GeneralService {
     public HashMap<String, Object>[] retrieveXmlToMapData(String url, HashMap<String, Object> param) throws Exception {
         HashMap<String, Object>[] mapArray = null;
 
-        String getUrl = url + "?";
 
-        if(param != null){
-            List<String> keyList = new ArrayList<>(param.keySet());
-
-            for (String key : keyList) {
-                getUrl += "&" + key + "=" + URLEncoder.encode(param.get(key).toString(), "UTF-8");
-            }
-        }
+        String getUrl = NHelper.settingGetUrl(url, param);
 
         mapArray = NHelper.getHashMapArrayDataFromUrlXml(getUrl);
-
-//        if(param.getIsCamelCase()){
-//            mapArray = NHelper.convertKeysToCamelCase(mapArray);
-//        }
 
         return mapArray;
 
