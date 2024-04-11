@@ -6,7 +6,7 @@
 
   <groupId>com.neutti.npa</groupId>
   <artifactId>npa-korea</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <packaging>jar</packaging>
 
   <developers>
@@ -37,9 +37,9 @@
 
 
   <scm>
-    <url>https://github.com/neutti-corp/neutti-publicdata-library</url>
-    <connection>scm:git:git://github.com/neutti-corp/neutti-publicdata-library.git</connection>
-    <developerConnection>scm:git:ssh://github.com:neutti-corp/neutti-publicdata-library.git</developerConnection>
+    <url>https://github.com/neutti-corp/public-api-korea</url>
+    <connection>scm:git:git://github.com/neutti-corp/public-api-korea.git</connection>
+    <developerConnection>scm:git:ssh://github.com:neutti-corp/public-api-korea.git</developerConnection>
   </scm>
 
   <name>Neutti Public API Korea</name>
