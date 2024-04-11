@@ -23,42 +23,28 @@ import java.util.Map;
 
 public class GeneralService {
 
-    public HashMap<String, Object>[] retrieveData(ParamVO param) throws Exception {
-        String resultType;
+    public HashMap<String, Object>[] retrieveJsonData(String url, HashMap<String, Object> param) throws Exception {
         HashMap<String, Object>[] mapArray = null;
 
-        String url = param.getUrl();
-        String serviceKey = param.getServiceKey();
-        Boolean isJson = param.getIsJson();
-        int pageNo = param.getPageNo();
-        int numOfRows = param.getNumOfRows();
-        HashMap<String, Object> etcParam = param.getEtcParam();
+        String getUrl = url + "?";
 
-        serviceKey = NHelper.ensureDecoded(serviceKey);
-
-        if(isJson){
-            resultType = "json";
-        }else {
-            resultType = "xml";
-        }
-        String getUrl = url + "?serviceKey=" + URLEncoder.encode(serviceKey, "UTF-8") + "&resultType=" + resultType + "&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
-
-        if(etcParam != null){
-            List<String> keyList = new ArrayList<>(etcParam.keySet());
+        if(param != null){
+            List<String> keyList = new ArrayList<>(param.keySet());
 
             for (String key : keyList) {
-                getUrl += "&" + key + "=" + URLEncoder.encode(etcParam.get(key).toString(), "UTF-8");
+                getUrl += "&" + key + "=" + URLEncoder.encode(param.get(key).toString(), "UTF-8");
             }
         }
 
-        mapArray = NHelper.getHashMapArrayDataFromUrl(getUrl, isJson);
+        mapArray = NHelper.getHashMapArrayDataFromUrl(getUrl, true);
 
-        if(param.getIsCamelCase()){
-            mapArray = NHelper.convertKeysToCamelCase(mapArray);
-        }
+//        if(param.getIsCamelCase()){
+//            mapArray = NHelper.convertKeysToCamelCase(mapArray);
+//        }
 
         return mapArray;
 
     }
+
 
 }

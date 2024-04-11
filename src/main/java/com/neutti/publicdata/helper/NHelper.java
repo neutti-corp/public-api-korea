@@ -111,22 +111,33 @@ public class NHelper {
         HashMap<String, Object>[] mapArray = null;
 
         if(isJson){
-            JsonArray itemsArray = new JsonArray();
+            JsonArray itemsArray;
 
             try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());
                  JsonReader jsonReader = new JsonReader(reader)) {
                 jsonReader.setLenient(true);
-                JsonObject jsonObject = JsonParser.parseReader(jsonReader).getAsJsonObject();
-                itemsArray = findFirstArray(jsonObject);
-                // error message generate
-                if(itemsArray == null){
-                    mapArray = new HashMap[1];
-                    mapArray[0]=retrieveErrorCodeMap(jsonObject);
-                }else{
+                JsonElement jsonElement = JsonParser.parseReader(jsonReader);
+
+                if (jsonElement.isJsonArray()) { // Check if the root element is an array
+                    itemsArray = jsonElement.getAsJsonArray();
                     mapArray = new Gson().fromJson(itemsArray, HashMap[].class);
+                } else if (jsonElement.isJsonObject()) {
+                    JsonObject jsonObject = jsonElement.getAsJsonObject();
+                    itemsArray = findFirstArray(jsonObject);
+
+                    if(itemsArray == null){
+                        mapArray = new HashMap[1];
+                        mapArray[0] = retrieveErrorCodeMap(jsonObject);
+                    }else{
+                        mapArray = new Gson().fromJson(itemsArray, HashMap[].class);
+                    }
+                } else {
+                    throw new IllegalStateException("Expected JSON array or object but found neither");
                 }
+
+
             } catch (IllegalStateException e){
-                throw new Exception("You've exceeded API rate limits");
+                e.printStackTrace();
             }
 
         } else {

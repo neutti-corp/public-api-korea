@@ -8,6 +8,8 @@ import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultVO;
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
+
 
 /**
  * Unit test for simple App.
@@ -18,8 +20,8 @@ public class AppTest
     extends TestCase
 {
     public void testSomething() {
-        retrievePubliclyAnnouncedLandPriceWms();
-
+        //retrievePubliclyAnnouncedLandPrice();
+        retrieveGeneralData();
     }
 
     // 공시지가 wms 이미지 불러오기
@@ -56,5 +58,25 @@ public class AppTest
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void retrieveGeneralData() {
+        GeneralService service = new GeneralService();
+        String url = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON";
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("data", "AP01");
+        param.put("authkey", "0XoXF60wost04g7mjaxCVOzN980NGE18");
+
+        try {
+            HashMap<String, Object>[] rsltList = service.retrieveJsonData(url,param);
+            for(HashMap<String, Object> data : rsltList){
+                log.info(data.toString());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
     }
 }

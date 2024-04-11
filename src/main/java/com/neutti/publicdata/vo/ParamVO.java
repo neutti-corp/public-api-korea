@@ -15,7 +15,7 @@ public class ParamVO {
     /* rows per page */
     private int numOfRows = 10;
     /* when isJson = false, it means xml. the other means json */
-    private Boolean isJson = false;
+    private Boolean isJson = true;
     /* when isCamelCase = true, the return variables changed to camel case */
     private Boolean isCamelCase = false;
     /* etc parameter */
