@@ -22,7 +22,8 @@ public class AppTest
     public void testSomething() {
         //retrievePubliclyAnnouncedLandPrice();
         //retrieveJsonToMapData();
-        retrieveXmlToMapData2();
+        //retrieveXmlToMapData2();
+        retrieveXmlToMapData3();
     }
 
     // 공시지가 wms 이미지 불러오기
@@ -114,6 +115,24 @@ public class AppTest
         String url = "http://api.sexoffender.go.kr/openapi/SOCitysStats/";
         HashMap<String, Object> param = new HashMap<String, Object>();
         GeneralService service = new GeneralService();
+        try {
+            HashMap<String, Object>[] rsltList = service.retrieveXmlToMapData(url,param);
+            for(HashMap<String, Object> data : rsltList){
+                log.info(data.toString());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void retrieveXmlToMapData3() {
+        GeneralService service = new GeneralService();
+        String url = "https://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/get24DivisionsInfo";
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("serviceKey", "maQN9ERlzOBZfcjIu1K8huRRCi%2BYhF%2B%2BeEy%2BtnCMTi3QGADZlvLzq%2FYgO2t3O95nzI5MGT5dkNmx03gEAnzqyA%3D%3D");
+        param.put("solYear", "2024");
+
+
         try {
             HashMap<String, Object>[] rsltList = service.retrieveXmlToMapData(url,param);
             for(HashMap<String, Object> data : rsltList){

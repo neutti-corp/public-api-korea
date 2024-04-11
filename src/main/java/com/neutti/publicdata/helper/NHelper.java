@@ -145,44 +145,88 @@ public class NHelper {
         HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
         conn.setRequestMethod("GET");
 
-        // Use DocumentBuilderFactory to parse XML
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document xml = dBuilder.parse(conn.getInputStream());
         xml.getDocumentElement().normalize();
 
-        // Dynamically identify repeating elements (e.g., "City")
-        NodeList nodeList = xml.getDocumentElement().getChildNodes();
-        HashMap<String, Object>[] mapArray = new HashMap[nodeList.getLength()];
+        // Check for an error response first
+        if (xml.getDocumentElement().getTagName().equals("OpenAPI_ServiceResponse")) {
+            return handleErrorResponse(xml.getDocumentElement());
+        }
 
-        int index = 0;
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element element = (Element) node;
-                NodeList childNodes = element.getChildNodes();
-                HashMap<String, Object> map = new HashMap<>();
-                for (int j = 0; j < childNodes.getLength(); j++) {
-                    Node childNode = childNodes.item(j);
-                    if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-                        Element childElement = (Element) childNode;
-                        map.put(childElement.getTagName(), childElement.getTextContent());
-                    }
+        List<HashMap<String, Object>> mapsList = new ArrayList<>();
+        findAndProcessListElements(xml.getDocumentElement(), mapsList);
+
+        @SuppressWarnings("unchecked")
+        HashMap<String, Object>[] mapArray = new HashMap[mapsList.size()];
+        mapArray = mapsList.toArray(mapArray);
+
+        return mapArray;
+    }
+
+    private static HashMap<String, Object>[] handleErrorResponse(Element errorElement) {
+        // Extract error details
+        String errMsg = errorElement.getElementsByTagName("errMsg").item(0).getTextContent();
+        String returnAuthMsg = errorElement.getElementsByTagName("returnAuthMsg").item(0).getTextContent();
+        String returnReasonCode = errorElement.getElementsByTagName("returnReasonCode").item(0).getTextContent();
+
+        // Prepare an error message map
+        HashMap<String, Object> errorMap = new HashMap<>();
+        errorMap.put("Error Message", errMsg);
+        errorMap.put("Authorization Message", returnAuthMsg);
+        errorMap.put("Reason Code", returnReasonCode);
+
+        @SuppressWarnings("unchecked")
+        HashMap<String, Object>[] errorResponse = new HashMap[1];
+        errorResponse[0] = errorMap;
+
+        return errorResponse;
+    }
+
+    private static void findAndProcessListElements(Node node, List<HashMap<String, Object>> mapsList) {
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+            Element element = (Element) node;
+
+            // Assuming list-like structures are those where multiple child elements share the same tag name
+            HashMap<String, Integer> tagCounts = new HashMap<>();
+            NodeList children = element.getChildNodes();
+            for (int i = 0; i < children.getLength(); i++) {
+                Node child = children.item(i);
+                if (child.getNodeType() == Node.ELEMENT_NODE) {
+                    tagCounts.put(child.getNodeName(), tagCounts.getOrDefault(child.getNodeName(), 0) + 1);
                 }
-                if (!map.isEmpty()) {
-                    mapArray[index++] = map;
+            }
+
+            for (String tag : tagCounts.keySet()) {
+                if (tagCounts.get(tag) > 1) { // Found a repeating structure
+                    NodeList repeatingElements = element.getElementsByTagName(tag);
+                    for (int i = 0; i < repeatingElements.getLength(); i++) {
+                        Node listItem = repeatingElements.item(i);
+                        HashMap<String, Object> map = new HashMap<>();
+                        NodeList listItemChildren = listItem.getChildNodes();
+                        for (int j = 0; j < listItemChildren.getLength(); j++) {
+                            Node childNode = listItemChildren.item(j);
+                            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                                map.put(childNode.getNodeName(), childNode.getTextContent().trim());
+                            }
+                        }
+                        if (!map.isEmpty()) {
+                            mapsList.add(map);
+                        }
+                    }
+                    break; // Assuming only one list-like structure per parent element
+                }
+            }
+
+            // Recurse for non-repeating child elements (to find nested lists)
+            for (int i = 0; i < children.getLength(); i++) {
+                Node child = children.item(i);
+                if (child.getNodeType() == Node.ELEMENT_NODE && tagCounts.getOrDefault(child.getNodeName(), 0) <= 1) {
+                    findAndProcessListElements(child, mapsList);
                 }
             }
         }
-
-        // Resize the array to match the actual number of elements
-        if (index < nodeList.getLength()) {
-            HashMap<String, Object>[] tempArray = new HashMap[index];
-            System.arraycopy(mapArray, 0, tempArray, 0, index);
-            mapArray = tempArray;
-        }
-
-        return mapArray;
     }
 
     public static String fetchAndEncodeBase64(String urlString) {
