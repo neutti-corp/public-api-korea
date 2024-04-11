@@ -10,14 +10,13 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.StringReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -187,6 +186,33 @@ public class NHelper {
         return mapArray;
 
     }
+
+    public static String fetchAndEncodeBase64(String urlString) {
+        try {
+            URL url = new URL(urlString);
+
+            try (InputStream inputStream = url.openStream();
+                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+
+                byte[] dataBytes = outputStream.toByteArray();
+
+                String base64Encoded = Base64.getEncoder().encodeToString(dataBytes);
+
+                return base64Encoded;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     private static HashMap<String, Object> retrieveErrorCodeMap(JsonObject  jobject) {
         HashMap<String, Object> rtrnMap = null;

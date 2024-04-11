@@ -7,10 +7,10 @@ import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceParamVO;
 import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultDtlVO;
 import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultVO;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 /**
  * 특정 api 서비스
@@ -24,50 +24,45 @@ public class DataSpecificApiService {
      * @throws Exception
      */
     public PubliclyAnnouncedLandPriceResultVO retrievePubliclyAnnouncedLandPrice(PubliclyAnnouncedLandPriceParamVO param) throws Exception {
+        // Basic URL setup
+        String baseUrl = "https://api.vworld.kr/ned/data/getIndvdLandPriceAttr";
+        String serviceKey = encodeValue(NHelper.ensureDecoded(param.getKey()));
+        String format = param.isJson() ? "json" : "xml";
 
-        HashMap<String, Object>[] mapArray = null;
+        Map<String, String> queryParams = new HashMap<>();
+        queryParams.put("key", serviceKey);
+        queryParams.put("format", format);
+        queryParams.put("numOfRows", String.valueOf(param.getNumOfRows()));
+        queryParams.put("pageNo", String.valueOf(param.getPageNo()));
 
-        String url = "https://api.vworld.kr/ned/data/getIndvdLandPriceAttr";
-        String serviceKey = param.getKey();
-        int pageNo = param.getPageNo();
-        int numOfRows = param.getNumOfRows();
-        String domain = param.getDomain();
-        String pnu = param.getPnu();
-        String stdrYear = param.getStdrYear();
-        boolean isJson = param.isJson();
-        String format;
-        if(isJson){
-            format = "json";
-        }else{
-            format = "xml";
+        if (param.getDomain() != null) queryParams.put("domain", param.getDomain());
+        if (param.getPnu() != null) queryParams.put("pnu", encodeValue(param.getPnu()));
+        if (param.getStdrYear() != null) queryParams.put("stdrYear", encodeValue(param.getStdrYear()));
+
+        StringBuilder queryBuilder = new StringBuilder();
+        for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+            queryBuilder.append(encodeValue(entry.getKey()))
+                    .append('=')
+                    .append(encodeValue(entry.getValue()))
+                    .append('&');
         }
-        serviceKey = NHelper.ensureDecoded(serviceKey);
+        String query = queryBuilder.toString().replaceAll(".$", "");
 
-        StringBuilder urlBuilder = new StringBuilder(url); /* URL */
-        StringBuilder parameter  = new StringBuilder();
-        parameter.append("?" + URLEncoder.encode("key","UTF-8") + "=" + serviceKey); /*key*/
-        if(domain != null)  parameter.append("&" + URLEncoder.encode("domain","UTF-8") + "=" + domain); /*domain*/
-        if(pnu != null)  parameter.append("&" + URLEncoder.encode("pnu","UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
-        if(stdrYear != null)  parameter.append("&" + URLEncoder.encode("stdrYear","UTF-8") + "=" + URLEncoder.encode(stdrYear, "UTF-8")); /* 기준연도(YYYY: 4자리) */
-        parameter.append("&" + URLEncoder.encode("format","UTF-8") + "=" + URLEncoder.encode(format, "UTF-8")); /* 응답결과 형식(xml 또는 json) */
-        parameter.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode(String.valueOf(numOfRows), "UTF-8")); /* 검색건수 (최대 1000) */
-        parameter.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(String.valueOf(pageNo), "UTF-8")); /* 페이지 번호 */
+        String fullUrl = baseUrl + "?" + query;
 
-        String getUrl = urlBuilder.toString() + parameter.toString();
-
-        mapArray = NHelper.getHashMapArrayDataFromUrl(getUrl, isJson);
+        HashMap<String, Object>[] mapArray = NHelper.getHashMapArrayDataFromUrl(fullUrl, param.isJson());
 
         ObjectMapper mapper = new ObjectMapper();
-        List<PubliclyAnnouncedLandPriceResultDtlVO> rtrnList = new ArrayList<PubliclyAnnouncedLandPriceResultDtlVO>();
+        List<PubliclyAnnouncedLandPriceResultDtlVO> rtrnList = new ArrayList<>();
         PubliclyAnnouncedLandPriceResultVO rtrnVO = new PubliclyAnnouncedLandPriceResultVO();
 
-        for(int i=0; i< mapArray.length; i++){
+        for (int i = 0; i < mapArray.length; i++) {
             HashMap<String, Object> map = mapArray[i];
-            if(i == 0){
-                String resultCode = (String)map.get("resultCode");
-                if(resultCode != null && !resultCode.isEmpty()){
+            if (i == 0) {
+                String resultCode = (String) map.get("resultCode");
+                if (resultCode != null && !resultCode.isEmpty()) {
                     rtrnVO.setResultCode(resultCode);
-                    rtrnVO.setResultMsg((String)map.get("resultMsg"));
+                    rtrnVO.setResultMsg((String) map.get("resultMsg"));
                 }
             }
             PubliclyAnnouncedLandPriceResultDtlVO vo = mapper.convertValue(map, PubliclyAnnouncedLandPriceResultDtlVO.class);
@@ -76,6 +71,22 @@ public class DataSpecificApiService {
         rtrnVO.setDataList(rtrnList);
 
         return rtrnVO;
+    }
 
+    // Utility method to encode URL parameter values
+    private static String encodeValue(String value) {
+        try {
+            return URLEncoder.encode(value, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // This should never happen with the UTF-8 encoding
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public String retrievePubliclyAnnouncedLandPriceWms(String url) throws Exception {
+        String base64 = NHelper.fetchAndEncodeBase64(url);
+
+        return base64;
     }
 }
