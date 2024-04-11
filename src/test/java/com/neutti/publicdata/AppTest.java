@@ -23,7 +23,9 @@ public class AppTest
         //retrievePubliclyAnnouncedLandPrice();
         //retrieveJsonToMapData();
         //retrieveXmlToMapData2();
-        retrieveXmlToMapData3();
+        //retrieveXmlToMapData3();
+        retrieveXmlToMapData5();
+        //retrieveJsonToMapData2();
     }
 
     // 공시지가 wms 이미지 불러오기
@@ -135,6 +137,64 @@ public class AppTest
 
         try {
             HashMap<String, Object>[] rsltList = service.retrieveXmlToMapData(url,param);
+            for(HashMap<String, Object> data : rsltList){
+                log.info(data.toString());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void retrieveXmlToMapData4() {
+        GeneralService service = new GeneralService();
+        String url = "https://nip.kdca.go.kr/irgd/cov19stats.do";
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("list", "all");
+
+        try {
+            HashMap<String, Object>[] rsltList = service.retrieveXmlToMapData(url,param);
+            for(HashMap<String, Object> data : rsltList){
+                log.info(data.toString());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void retrieveXmlToMapData5() {
+        GeneralService service = new GeneralService();
+        String url = "https://apis.data.go.kr/1400377/forestPoint/forestPointListGeongugSearch";
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        // Decoding 인증키 입력
+        param.put("serviceKey", "maQN9ERlzOBZfcjIu1K8huRRCi+YhF++eEy+tnCMTi3QGADZlvLzq/YgO2t3O95nzI5MGT5dkNmx03gEAnzqyA==");
+        param.put("pageNo", 1);
+        param.put("numOfRows", 10);
+        param.put("_type", "xml");
+        param.put("excludeForecast", 0);
+
+        try {
+            HashMap<String, Object>[] rsltList = service.retrieveXmlToMapData(url,param);
+            for(HashMap<String, Object> data : rsltList){
+                log.info(data.toString());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void retrieveJsonToMapData2(){
+        GeneralService service = new GeneralService();
+        String url = "https://apis.data.go.kr/1400377/forestPoint/forestPointListGeongugSearch";
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        // Decoding 인증키 입력
+        param.put("serviceKey", "maQN9ERlzOBZfcjIu1K8huRRCi+YhF++eEy+tnCMTi3QGADZlvLzq/YgO2t3O95nzI5MGT5dkNmx03gEAnzqyA==");
+        param.put("pageNo", 1);
+        param.put("numOfRows", 10);
+        param.put("_type", "json");
+        param.put("excludeForecast", 0);
+
+        try {
+            HashMap<String, Object>[] rsltList = service.retrieveJsonToMapData(url,param);
             for(HashMap<String, Object> data : rsltList){
                 log.info(data.toString());
             }
