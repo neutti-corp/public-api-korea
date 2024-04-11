@@ -68,7 +68,7 @@ public class AppTest
         param.put("authkey", "0XoXF60wost04g7mjaxCVOzN980NGE18");
 
         try {
-            HashMap<String, Object>[] rsltList = service.retrieveJsonData(url,param);
+            HashMap<String, Object>[] rsltList = service.retrieveJsonToMapData(url,param);
             for(HashMap<String, Object> data : rsltList){
                 log.info(data.toString());
             }

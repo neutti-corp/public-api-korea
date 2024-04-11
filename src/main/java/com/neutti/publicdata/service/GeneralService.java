@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class GeneralService {
 
-    public HashMap<String, Object>[] retrieveJsonData(String url, HashMap<String, Object> param) throws Exception {
+    public HashMap<String, Object>[] retrieveJsonToMapData(String url, HashMap<String, Object> param) throws Exception {
         HashMap<String, Object>[] mapArray = null;
 
         String getUrl = url + "?";
@@ -36,7 +36,30 @@ public class GeneralService {
             }
         }
 
-        mapArray = NHelper.getHashMapArrayDataFromUrl(getUrl, true);
+        mapArray = NHelper.getHashMapArrayDataFromUrlJson(getUrl);
+
+//        if(param.getIsCamelCase()){
+//            mapArray = NHelper.convertKeysToCamelCase(mapArray);
+//        }
+
+        return mapArray;
+
+    }
+
+    public HashMap<String, Object>[] retrieveXmlToMapData(String url, HashMap<String, Object> param) throws Exception {
+        HashMap<String, Object>[] mapArray = null;
+
+        String getUrl = url + "?";
+
+        if(param != null){
+            List<String> keyList = new ArrayList<>(param.keySet());
+
+            for (String key : keyList) {
+                getUrl += "&" + key + "=" + URLEncoder.encode(param.get(key).toString(), "UTF-8");
+            }
+        }
+
+        mapArray = NHelper.getHashMapArrayDataFromUrlXml(getUrl);
 
 //        if(param.getIsCamelCase()){
 //            mapArray = NHelper.convertKeysToCamelCase(mapArray);

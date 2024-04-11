@@ -50,7 +50,13 @@ public class DataSpecificApiService {
 
         String fullUrl = baseUrl + "?" + query;
 
-        HashMap<String, Object>[] mapArray = NHelper.getHashMapArrayDataFromUrl(fullUrl, param.isJson());
+        HashMap<String, Object>[] mapArray;
+
+        if(param.isJson()){
+            mapArray = NHelper.getHashMapArrayDataFromUrlJson(fullUrl);
+        }else{
+            mapArray = NHelper.getHashMapArrayDataFromUrlXml(fullUrl);
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         List<PubliclyAnnouncedLandPriceResultDtlVO> rtrnList = new ArrayList<>();

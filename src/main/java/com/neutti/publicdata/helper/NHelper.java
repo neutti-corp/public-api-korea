@@ -100,102 +100,105 @@ public class NHelper {
     /**
      * url => hashMap 데이터 얻기(json, xml)
      * @param url
-     * @param isJson: true => json, false => xml
      * @return
      * @throws Exception
      */
-    public static HashMap<String, Object>[] getHashMapArrayDataFromUrl(String url, Boolean isJson) throws Exception{
+    public static HashMap<String, Object>[] getHashMapArrayDataFromUrlJson(String url) throws Exception{
         URL targetUrl = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
         conn.setRequestMethod("GET");
         HashMap<String, Object>[] mapArray = null;
 
-        if(isJson){
-            JsonArray itemsArray;
+        JsonArray itemsArray;
 
-            try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());
-                 JsonReader jsonReader = new JsonReader(reader)) {
-                jsonReader.setLenient(true);
-                JsonElement jsonElement = JsonParser.parseReader(jsonReader);
+        try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());
+             JsonReader jsonReader = new JsonReader(reader)) {
+            jsonReader.setLenient(true);
+            JsonElement jsonElement = JsonParser.parseReader(jsonReader);
 
-                if (jsonElement.isJsonArray()) { // Check if the root element is an array
-                    itemsArray = jsonElement.getAsJsonArray();
-                    mapArray = new Gson().fromJson(itemsArray, HashMap[].class);
-                } else if (jsonElement.isJsonObject()) {
-                    JsonObject jsonObject = jsonElement.getAsJsonObject();
-                    itemsArray = findFirstArray(jsonObject);
+            if (jsonElement.isJsonArray()) { // Check if the root element is an array
+                itemsArray = jsonElement.getAsJsonArray();
+                mapArray = new Gson().fromJson(itemsArray, HashMap[].class);
+            } else if (jsonElement.isJsonObject()) {
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
+                itemsArray = findFirstArray(jsonObject);
 
-                    if(itemsArray == null){
-                        mapArray = new HashMap[1];
-                        mapArray[0] = retrieveErrorCodeMap(jsonObject);
-                    }else{
-                        mapArray = new Gson().fromJson(itemsArray, HashMap[].class);
-                    }
-                } else {
-                    throw new IllegalStateException("Expected JSON array or object but found neither");
-                }
-
-
-            } catch (IllegalStateException e){
-                e.printStackTrace();
-            }
-
-        } else {
-            try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());) {
-                StringBuilder xmlData = new StringBuilder();
-                BufferedReader bufferedReader = new BufferedReader(reader);
-
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    xmlData.append(line);
-                }
-
-                String xmlString = xmlData.toString();
-                Document xml = convertStringToDocument(xmlString);
-
-                // Dynamically find the first 'array-like' node
-                NodeList firstSignificantNodeList = findFirstSignificantNodeList(xml);
-
-                if(firstSignificantNodeList != null){
-                    mapArray = new HashMap[firstSignificantNodeList.getLength()];
-                    for (int i = 0; i < firstSignificantNodeList.getLength(); i++) {
-                        Node child = firstSignificantNodeList.item(i);
-                        NodeList grandChilds = child.getChildNodes();
-                        HashMap<String, Object> values = new HashMap<>();
-                        for (int k = 0; k < grandChilds.getLength(); k++) {
-                            Node grandChild = grandChilds.item(k);
-                            String key = grandChild.getNodeName().trim();
-                            String value = grandChild.getTextContent().trim();
-                            values.put(key, value);
-                        }
-                        mapArray[i] = values;
-                    }
-                }else{
-                    Element root = xml.getDocumentElement();
-
-                    // Prepare the HashMap
-                    HashMap<String, Object> map = new HashMap<>();
+                if(itemsArray == null){
                     mapArray = new HashMap[1];
-                    // Get all child nodes of the root element
-                    NodeList children = root.getChildNodes();
-                    for (int i = 0; i < children.getLength(); i++) {
-                        if (children.item(i) instanceof Element) {
-                            Element child = (Element) children.item(i);
-
-                            // Use the tag name as the key and the text content as the value
-                            map.put(child.getTagName(), child.getTextContent());
-                        }
-                    }
-                    mapArray[0]=map;
-
+                    mapArray[0] = retrieveErrorCodeMap(jsonObject);
+                }else{
+                    mapArray = new Gson().fromJson(itemsArray, HashMap[].class);
                 }
-
-
+            } else {
+                throw new IllegalStateException("Expected JSON array or object but found neither");
             }
+
+
+        } catch (IllegalStateException e){
+            e.printStackTrace();
         }
 
         return mapArray;
 
+    }
+
+    public static HashMap<String, Object>[] getHashMapArrayDataFromUrlXml(String url) throws Exception{
+        URL targetUrl = new URL(url);
+        HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
+        conn.setRequestMethod("GET");
+        HashMap<String, Object>[] mapArray = null;
+        try (InputStreamReader reader = new InputStreamReader(conn.getInputStream());) {
+            StringBuilder xmlData = new StringBuilder();
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                xmlData.append(line);
+            }
+
+            String xmlString = xmlData.toString();
+            Document xml = convertStringToDocument(xmlString);
+
+            // Dynamically find the first 'array-like' node
+            NodeList firstSignificantNodeList = findFirstSignificantNodeList(xml);
+
+            if(firstSignificantNodeList != null){
+                mapArray = new HashMap[firstSignificantNodeList.getLength()];
+                for (int i = 0; i < firstSignificantNodeList.getLength(); i++) {
+                    Node child = firstSignificantNodeList.item(i);
+                    NodeList grandChilds = child.getChildNodes();
+                    HashMap<String, Object> values = new HashMap<>();
+                    for (int k = 0; k < grandChilds.getLength(); k++) {
+                        Node grandChild = grandChilds.item(k);
+                        String key = grandChild.getNodeName().trim();
+                        String value = grandChild.getTextContent().trim();
+                        values.put(key, value);
+                    }
+                    mapArray[i] = values;
+                }
+            }else{
+                Element root = xml.getDocumentElement();
+
+                // Prepare the HashMap
+                HashMap<String, Object> map = new HashMap<>();
+                mapArray = new HashMap[1];
+                // Get all child nodes of the root element
+                NodeList children = root.getChildNodes();
+                for (int i = 0; i < children.getLength(); i++) {
+                    if (children.item(i) instanceof Element) {
+                        Element child = (Element) children.item(i);
+
+                        // Use the tag name as the key and the text content as the value
+                        map.put(child.getTagName(), child.getTextContent());
+                    }
+                }
+                mapArray[0]=map;
+
+            }
+
+
+        }
+        return mapArray;
     }
 
     public static String fetchAndEncodeBase64(String urlString) {
