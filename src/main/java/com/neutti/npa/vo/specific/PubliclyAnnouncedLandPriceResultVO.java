@@ -1,4 +1,4 @@
-package com.neutti.publicdata.vo.specific;
+package com.neutti.npa.vo.specific;
 
 import lombok.Data;
 

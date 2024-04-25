@@ -1,7 +1,7 @@
-package com.neutti.publicdata.service;
+package com.neutti.npa.service;
 
 
-import com.neutti.publicdata.vo.ResultVO;
+import com.neutti.npa.vo.data_go.ResponseVO;
 
 import java.net.URL;
 
@@ -13,7 +13,7 @@ public interface APIPullService {
      * @param servicePath
      * @return
      */
-    public ResultVO response(String serviceKey, String apiNum, String reqPath, String servicePath);
+    public ResponseVO response(String serviceKey, String apiNum, String reqPath, String servicePath);
 
     /**
      *
@@ -21,5 +21,5 @@ public interface APIPullService {
      * @param url : full request url
      * @return
      */
-    public ResultVO response(String serviceKey, URL url);
+    public ResponseVO response(String serviceKey, URL url);
 }

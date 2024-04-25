@@ -1,4 +1,4 @@
-package com.neutti.publicdata.helper;
+package com.neutti.npa.helper;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
@@ -6,7 +6,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

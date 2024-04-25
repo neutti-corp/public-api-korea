@@ -1,15 +1,13 @@
-package com.neutti.publicdata;
+package com.neutti.npa.korea;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neutti.publicdata.helper.NHelper;
-import com.neutti.publicdata.vo.ParamVO;
-import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceParamVO;
-import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultDtlVO;
-import com.neutti.publicdata.vo.specific.PubliclyAnnouncedLandPriceResultVO;
+import com.neutti.npa.helper.NHelper;
+import com.neutti.npa.vo.specific.PubliclyAnnouncedLandPriceParamVO;
+import com.neutti.npa.vo.specific.PubliclyAnnouncedLandPriceResultDtlVO;
+import com.neutti.npa.vo.specific.PubliclyAnnouncedLandPriceResultVO;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**

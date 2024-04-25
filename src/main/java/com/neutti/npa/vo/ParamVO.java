@@ -1,8 +1,9 @@
-package com.neutti.publicdata.vo;
+package com.neutti.npa.vo;
 
 import lombok.Data;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class ParamVO {
@@ -19,6 +20,6 @@ public class ParamVO {
     /* when isCamelCase = true, the return variables changed to camel case */
     private Boolean isCamelCase = false;
     /* etc parameter */
-    private HashMap<String, Object> etcParam;
+    private Map<String, Object> etcParam = new HashMap<>();
 
 }

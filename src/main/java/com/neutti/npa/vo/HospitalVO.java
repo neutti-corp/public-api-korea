@@ -1,4 +1,4 @@
-package com.neutti.publicdata.vo;
+package com.neutti.npa.vo;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;

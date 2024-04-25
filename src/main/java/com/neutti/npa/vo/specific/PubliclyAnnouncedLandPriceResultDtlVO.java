@@ -1,4 +1,4 @@
-package com.neutti.publicdata.vo.specific;
+package com.neutti.npa.vo.specific;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
