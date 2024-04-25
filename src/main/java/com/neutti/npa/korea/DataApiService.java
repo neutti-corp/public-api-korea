@@ -8,12 +8,14 @@ import com.neutti.npa.vo.HostType;
 import com.neutti.npa.vo.ParamVO;
 import com.neutti.npa.vo.data_go.ResponseVO;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
 
 /**
  * <a href="https://www.data.go.kr/">공공데이터포털</a>
  */
+@Slf4j
 @Data
 public class DataApiService<T> implements APIPullService<T> {
     protected DataApiService(){}
@@ -37,6 +39,9 @@ public class DataApiService<T> implements APIPullService<T> {
 
     @Override
     public ResponseVO<T> response(ParamVO param) {
+        if(itemTypeRef == null) {
+            log.warn("ItemTypeRef 이 선언이 안 되있을 경우 항목(Item) 객체는 Map 형태로 변환됩니다.");
+        }
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
         ResponseVO<T> r = call.load(hostType, path, param, itemTypeRef);

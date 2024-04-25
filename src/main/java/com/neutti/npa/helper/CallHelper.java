@@ -30,8 +30,14 @@ public class CallHelper {
                 XmlMapper xmlMapper = new XmlMapper();
                 xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
                 xmlMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,true);
-                JavaType __type = xmlMapper.getTypeFactory().constructType(typeRef.getType());
-                JavaType ___type = xmlMapper.getTypeFactory().constructParametricType(ResponseVO.class,__type);
+                JavaType ___type;
+                if(typeRef == null){
+                    TypeReference __type = new TypeReference<ResponseVO<T>>() {};
+                    ___type = xmlMapper.getTypeFactory().constructType(__type);
+                }else{
+                    JavaType __type = xmlMapper.getTypeFactory().constructType(typeRef.getType());
+                    ___type = xmlMapper.getTypeFactory().constructParametricType(ResponseVO.class,__type);
+                }
                 if(log.isDebugEnabled()){
                     String r = IOUtils.toString(conn.getInputStream());
                     log.debug("result origin string : " + r);
