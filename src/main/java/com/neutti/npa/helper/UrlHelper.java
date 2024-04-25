@@ -26,9 +26,9 @@ public class UrlHelper {
                 if(!path.startsWith("/")) urlBuilder.append("/");
                 urlBuilder.append(path).append("?");
                 if(URLDecoder.decode(param.getServiceKey(),"utf-8").equals(param.getServiceKey())){
-                    urlBuilder.append("serviceKey").append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
-                }else{
                     urlBuilder.append("serviceKey").append("=").append(param.getServiceKey()).append("&");
+                }else{
+                    urlBuilder.append("serviceKey").append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
                 }
                 urlBuilder.append("pageNo").append("=").append(param.getPageNo()).append("&");
                 urlBuilder.append("numOfRows").append("=").append(param.getNumOfRows()).append("&");
