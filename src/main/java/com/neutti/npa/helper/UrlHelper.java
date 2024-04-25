@@ -6,6 +6,7 @@ import com.neutti.npa.vo.ParamVO;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -24,7 +25,11 @@ public class UrlHelper {
                 urlBuilder.append("http://apis.data.go.kr");
                 if(!path.startsWith("/")) urlBuilder.append("/");
                 urlBuilder.append(path).append("?");
-                urlBuilder.append("serviceKey").append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
+                if(URLDecoder.decode(param.getServiceKey(),"utf-8").equals(param.getServiceKey())){
+                    urlBuilder.append("serviceKey").append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
+                }else{
+                    urlBuilder.append("serviceKey").append("=").append(param.getServiceKey()).append("&");
+                }
                 urlBuilder.append("pageNo").append("=").append(param.getPageNo()).append("&");
                 urlBuilder.append("numOfRows").append("=").append(param.getNumOfRows()).append("&");
         }

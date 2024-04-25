@@ -21,5 +21,7 @@ public class ParamVO {
     private Boolean isCamelCase = false;
     /* etc parameter */
     private Map<String, Object> etcParam = new HashMap<>();
-
+    public void add(String key, Object value) {
+        etcParam.put(key, value);
+    }
 }
