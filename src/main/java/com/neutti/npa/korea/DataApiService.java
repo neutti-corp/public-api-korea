@@ -1,5 +1,6 @@
 package com.neutti.npa.korea;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.external.B552657.AedInfo;
 import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.service.APIPullService;
@@ -16,12 +17,13 @@ import java.net.URL;
 @Data
 public class DataApiService<T> implements APIPullService<T> {
     protected DataApiService(){}
-    public static <T> DataApiService<T> getInstance() {
+    public static <E> DataApiService<E> getInstance() {
         return new DataApiService<>();
     }
     private final HostType hostType = HostType.DATA_GO;
     private String path;
     private String serviceKey;
+    private TypeReference<T> itemTypeRef;
     private ParamVO param;
     @Override
     public ResponseVO<T> response(String serviceKey, String apiNum, String reqPath, String servicePath) {
@@ -37,7 +39,7 @@ public class DataApiService<T> implements APIPullService<T> {
     public ResponseVO<T> response(ParamVO param) {
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
-        ResponseVO<T> r = call.load(hostType, path, param);
+        ResponseVO<T> r = call.load(hostType, path, param, itemTypeRef);
         return r;
     }
 }

@@ -1,8 +1,6 @@
 package com.neutti.npa.external.B552657;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class AedInfo {
@@ -13,11 +11,11 @@ public class AedInfo {
     /**
      * 경도
      */
-    private String wgs84lon;
+    private String wgs84Lon;
     /**
      * 위도
      */
-    private String wgs84lat;
+    private String wgs84Lat;
     /**
      * 설치기관명
      */
@@ -29,15 +27,15 @@ public class AedInfo {
     /**
      * 설치위치
      */
-    private String buildplace;
+    private String buildPlace;
     /**
      * 설치기관전화번호
      */
-    private String clerktel;
+    private String clerkTel;
     /**
      * 설치기관주소
      */
-    private String buildaddress;
+    private String buildAddress;
     /**
      * 관리책임자명
      */
@@ -45,7 +43,7 @@ public class AedInfo {
     /**
      * 관리자 연락처
      */
-    private String managertel;
+    private String managerTel;
     /**
      * AED 모델명
      */

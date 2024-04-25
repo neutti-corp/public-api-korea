@@ -1,5 +1,6 @@
 package com.neutti.npa.vo.data_go;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neutti.npa.vo.DataType;
 import lombok.Data;
 
