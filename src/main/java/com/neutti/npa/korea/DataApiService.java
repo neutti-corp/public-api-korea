@@ -15,6 +15,7 @@ import java.net.URL;
  */
 @Data
 public class DataApiService<T> implements APIPullService<T> {
+    protected DataApiService(){}
     public static <T> DataApiService<T> getInstance() {
         return new DataApiService<>();
     }
