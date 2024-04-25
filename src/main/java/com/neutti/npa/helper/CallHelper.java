@@ -16,7 +16,7 @@ import java.util.*;
 @Slf4j
 public class CallHelper {
 
-    public <T> ResponseVO<T> load(HostType type, String path, ParamVO param) throws Exception{
+    public <T> ResponseVO<T> load(HostType type, String path, ParamVO param){
         HttpURLConnection conn = null;
         ResponseVO<T> result = null;
         try{
@@ -30,12 +30,14 @@ public class CallHelper {
                 XmlMapper xmlMapper = new XmlMapper();
                 xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
                 xmlMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,true);
-                String r = IOUtils.toString(conn.getInputStream());
-                log.info(r);
                 TypeReference<ResponseVO<T>> typeRef = new TypeReference<ResponseVO<T>>(){};
-                //TypeReference<ResponseVO<AedInfo>> typeRef = new TypeReference<ResponseVO<AedInfo>>(){};
-                //ResponseVO<typeRef>
-                result = xmlMapper.readValue(r, typeRef);
+                if(log.isDebugEnabled()){
+                    String r = IOUtils.toString(conn.getInputStream());
+                    log.debug("result origin string : " + r);
+                    result = xmlMapper.readValue(r, typeRef);
+                }else{
+                    result = xmlMapper.readValue(conn.getInputStream(), typeRef);
+                }
                 return result;
             } else {
                 log.debug("x");

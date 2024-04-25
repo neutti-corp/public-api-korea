@@ -1,6 +1,7 @@
 package com.neutti.npa.korea;
 
 import com.neutti.npa.service.APIPullService;
+import com.neutti.npa.vo.ParamVO;
 import com.neutti.npa.vo.data_go.ResponseVO;
 
 import java.net.URL;
@@ -16,6 +17,11 @@ public class DataSeoulApiService implements APIPullService {
 
     @Override
     public ResponseVO response(String serviceKey, URL url) {
+        return null;
+    }
+
+    @Override
+    public ResponseVO response(ParamVO param) {
         return null;
     }
 }

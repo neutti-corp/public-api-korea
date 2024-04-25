@@ -9,6 +9,7 @@ import com.neutti.npa.vo.data_go.ResponseVO;
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,15 +19,15 @@ import java.util.Map;
  */
 @Slf4j
 public class AppTest extends TestCase {
-    public void testSomething() throws Exception {
-        String path = "/B552657/AEDInfoInqireService/getAedLcinfoInqire";
+    public void testSomething() {
+        Calendar.getInstance();
+        DataApiService<AedInfo> service = DataApiService.getInstance();
+        service.setPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
+        service.setServiceKey("maQN9ERlzOBZfcjIu1K8huRRCi+YhF++eEy+tnCMTi3QGADZlvLzq/YgO2t3O95nzI5MGT5dkNmx03gEAnzqyA==");
         ParamVO param = new ParamVO();
-        param.setServiceKey("maQN9ERlzOBZfcjIu1K8huRRCi+YhF++eEy+tnCMTi3QGADZlvLzq/YgO2t3O95nzI5MGT5dkNmx03gEAnzqyA==");
         param.setPageNo(1);
         param.setNumOfRows(3);
-        DataApiService service = new DataApiService();
-        CallHelper call = new CallHelper();
-        ResponseVO<AedInfo> r = call.load(HostType.DATA_GO, path, param);
+        ResponseVO<AedInfo> r = service.response(param);
         log.info(r.getBody().getItems().toString());
     }
 }
