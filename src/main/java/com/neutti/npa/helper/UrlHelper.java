@@ -15,7 +15,14 @@ public class UrlHelper {
         StringBuilder urlBuilder = new StringBuilder();
         switch (type){
             case DATA_GO:
+                if(path.startsWith("http://apis.data.go.kr")){
+                    path = path.replace("http://apis.data.go.kr","");
+                }
+                if(path.startsWith("https://apis.data.go.kr")){
+                    path = path.replace("https://apis.data.go.kr","");
+                }
                 urlBuilder.append("http://apis.data.go.kr");
+                if(!path.startsWith("/")) urlBuilder.append("/");
                 urlBuilder.append(path).append("?");
                 urlBuilder.append("serviceKey").append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
                 urlBuilder.append("pageNo").append("=").append(param.getPageNo()).append("&");
