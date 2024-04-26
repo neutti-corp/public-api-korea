@@ -85,4 +85,24 @@ public class AppTest extends TestCase {
         log.info(r.getItems().toString());
 
     }
+
+    public void test4() {
+        DataApiService service = DataApiService.getInstance();
+        service.setPath("/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty");
+        service.setServiceKey(properties.getProperty("service1.key"));
+        ParamVO param = new ParamVO();
+        param.setPageNo(1);
+        param.setNumOfRows(3);
+        HashMap<String, Object> etcParam = new HashMap<String, Object>();
+        etcParam.put("sidoName", "서울");
+        etcParam.put("ver", "1.0");
+        etcParam.put("returnType", "xml");
+        param.setEtcParam(etcParam);
+
+
+        ResponseVO<Map> r = service.response(param);
+        log.info(r.getRequestUrl().toString());
+        log.info(r.getBody().getItems().toString());
+
+    }
 }

@@ -55,6 +55,8 @@ public class CallHelper {
                 }
 
                 String contentType = conn.getContentType();
+                contentType.toLowerCase().contains("application/xml");
+
                 boolean isJson = contentType != null && (contentType.contains("application/json") || contentType.contains("text/html"));
                 boolean isXml = contentType != null && (contentType.contains("application/xml") || contentType.contains("text/xml"));
 
