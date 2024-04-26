@@ -39,6 +39,9 @@ public class AppTest extends TestCase {
         }
     }
 
+    /**
+     * 국립중앙의료원_전국 자동심장충격기(AED) 정보 조회 서비스
+     */
     public void test1() {
         DataApiService<AedInfo> service = DataApiService.getInstance();
         service.setPath(properties.getProperty("service1.path"));
@@ -53,7 +56,9 @@ public class AppTest extends TestCase {
         log.info(r.getRequestUrl().toString());
         log.info(r.getBody().getItems().toString());
     }
-
+    /**
+     * 국토교통부_아파트매매 실거래 상세 자료
+     */
     public void test2() {
         DataApiService<RTMSData> service = DataApiService.getInstance();
         service.setPath(properties.getProperty("service2.path"));
