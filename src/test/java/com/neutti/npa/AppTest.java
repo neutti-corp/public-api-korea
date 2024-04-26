@@ -5,6 +5,7 @@ import com.neutti.npa.external.B552657.AedInfo;
 import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.korea.DataApiService;
 import com.neutti.npa.korea.DataGGApiService;
+import com.neutti.npa.korea.EximApiService;
 import com.neutti.npa.korea.MolitApiService;
 import com.neutti.npa.vo.HostType;
 import com.neutti.npa.vo.ParamVO;
@@ -40,7 +41,7 @@ public class AppTest extends TestCase {
 
     public void test1() {
         DataApiService<AedInfo> service = DataApiService.getInstance();
-        service.setPath(properties.getProperty("service1.path"));
+        service.setPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
         service.setServiceKey(properties.getProperty("service1.key"));
         service.setItemTypeRef(new TypeReference<AedInfo>() {});
 
@@ -55,7 +56,7 @@ public class AppTest extends TestCase {
 
     public void test2() {
         DataApiService service = DataApiService.getInstance();
-        service.setPath(properties.getProperty("service2.path"));
+        service.setPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
         service.setServiceKey(properties.getProperty("service2.key"));
         Map<String, Object> etcParam = new HashMap<String, Object>();
         etcParam.put("LAWD_CD", "11110");
@@ -69,8 +70,19 @@ public class AppTest extends TestCase {
         log.info(r.getRequestUrl().toString());
         log.info(r.getBody().getItems().toString());
 
+    }
 
-
+    public void test3() {
+        EximApiService<Map> service = EximApiService.getInstance();
+        service.setPath("/site/program/financial/exchangeJSON");
+        service.setServiceKey(properties.getProperty("service3.key"));
+        Map<String, Object> etcParam = new HashMap<String, Object>();
+        etcParam.put("data", "AP01");
+        ParamVO param = new ParamVO();
+        param.setEtcParam(etcParam);
+        ResponseVO<Map> r = service.response(param);
+        log.info(r.getRequestUrl().toString());
+        log.info(r.getItems().toString());
 
     }
 }

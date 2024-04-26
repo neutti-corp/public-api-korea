@@ -15,6 +15,7 @@ public class UrlHelper {
     public URL generate(HostType type, String path, ParamVO param) throws MalformedURLException, UnsupportedEncodingException {
         StringBuilder urlBuilder = new StringBuilder();
         String targertUrl = "";
+        String keyName = "serviceKey";
         switch (type){
             case DATA_GO:   /* 공공데이터 포털 */
                 if(path.contains("OpenAPI_ToolInstallPackage")){
@@ -24,6 +25,9 @@ public class UrlHelper {
                     targertUrl = "apis.data.go.kr";
                 }
                 break;
+            case EXIM:
+                targertUrl = "www.koreaexim.go.kr";
+                keyName = "authkey";
             case DATA_GG:
                 break;
             case DATA_SEOUL:
@@ -32,12 +36,13 @@ public class UrlHelper {
 
                 break;
         }
-        setupUrlBuilder(urlBuilder, path, targertUrl, param);
+        setupUrlBuilder(urlBuilder, path, targertUrl, param, keyName);
 
         return new URL(urlBuilder.toString());
     }
 
-    private void setupUrlBuilder (StringBuilder urlBuilder, String path, String targetUrl, ParamVO param) throws UnsupportedEncodingException {
+    private void setupUrlBuilder (StringBuilder urlBuilder, String path, String targetUrl, ParamVO param, String keyName) throws UnsupportedEncodingException {
+
         if(path.startsWith("http://" + targetUrl)){
             path = path.replace("http://" + targetUrl,"");
         }
@@ -48,9 +53,9 @@ public class UrlHelper {
         if(!path.startsWith("/")) urlBuilder.append("/");
         urlBuilder.append(path).append("?");
         if(URLDecoder.decode(param.getServiceKey(),"utf-8").equals(param.getServiceKey())){
-            urlBuilder.append("serviceKey").append("=").append(param.getServiceKey()).append("&");
+            urlBuilder.append(keyName).append("=").append(param.getServiceKey()).append("&");
         }else{
-            urlBuilder.append("serviceKey").append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
+            urlBuilder.append(keyName).append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
         }
         urlBuilder.append("pageNo").append("=").append(param.getPageNo()).append("&");
         urlBuilder.append("numOfRows").append("=").append(param.getNumOfRows()).append("&");
