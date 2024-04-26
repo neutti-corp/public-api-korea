@@ -32,6 +32,13 @@ public class UrlHelper {
                 }
                 urlBuilder.append("pageNo").append("=").append(param.getPageNo()).append("&");
                 urlBuilder.append("numOfRows").append("=").append(param.getNumOfRows()).append("&");
+                break;
+            case DATA_GG:
+                break;
+            case DATA_SEOUL:
+                break;
+            case VWORLD:
+                break;
         }
         Map<String, Object> etcParam = param.getEtcParam();
         for(Object key : etcParam.keySet() ){

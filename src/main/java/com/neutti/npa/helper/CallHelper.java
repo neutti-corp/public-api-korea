@@ -45,6 +45,7 @@ public class CallHelper {
                 }else{
                     result = xmlMapper.readValue(conn.getInputStream(), ___type);
                 }
+                result.setRequrestUrl(url);
                 return result;
             } else {
                 result = new ResponseVO<>();
