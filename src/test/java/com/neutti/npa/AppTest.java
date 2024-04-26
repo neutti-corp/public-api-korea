@@ -5,15 +5,18 @@ import com.neutti.npa.external.B552657.AedInfo;
 import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.korea.DataApiService;
 import com.neutti.npa.korea.DataGGApiService;
+import com.neutti.npa.korea.MolitApiService;
 import com.neutti.npa.vo.HostType;
 import com.neutti.npa.vo.ParamVO;
 import com.neutti.npa.vo.data_go.ResponseVO;
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 
 /**
@@ -21,29 +24,55 @@ import java.util.Map;
  */
 @Slf4j
 public class AppTest extends TestCase {
-    public void test() {
+
+    private static final Properties properties = new Properties();
+
+    static {
+        try (InputStream input = AppTest.class.getClassLoader().getResourceAsStream("test.properties")) {
+            if (input == null) {
+                throw new RuntimeException("Unable to find config.properties");
+            }
+            properties.load(input);
+        } catch (Exception ex) {
+            log.error("Error loading properties", ex);
+        }
+    }
+
+    public void test1() {
         DataApiService<AedInfo> service = DataApiService.getInstance();
-        service.setPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
-        service.setServiceKey("maQN9ERlzOBZfcjIu1K8huRRCi+YhF++eEy+tnCMTi3QGADZlvLzq/YgO2t3O95nzI5MGT5dkNmx03gEAnzqyA==");
+        service.setPath(properties.getProperty("service1.path"));
+        service.setServiceKey(properties.getProperty("service1.key"));
         service.setItemTypeRef(new TypeReference<AedInfo>() {});
+
         ParamVO param = new ParamVO();
         param.setPageNo(1);
         param.setNumOfRows(3);
+
         ResponseVO<AedInfo> r = service.response(param);
-        log.info(r.getRequrestUrl().toString());
-        //log.info(r.getBody().getItems().get(0).getClass().toString());
+        log.info(r.getRequestUrl().toString());
         log.info(r.getBody().getItems().toString());
     }
+
     public void test2() {
-        DataGGApiService<AedInfo> service = DataGGApiService.getInstance();
-        service.setPath1("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
-        service.setServiceKey1("maQN9ERlzOBZfcjIu1K8huRRCi+YhF++eEy+tnCMTi3QGADZlvLzq/YgO2t3O95nzI5MGT5dkNmx03gEAnzqyA==");
-        service.setItemTypeRef(new TypeReference<AedInfo>() {});
+        MolitApiService service = MolitApiService.getInstance();
+        service.setPath(properties.getProperty("service2.path"));
+        service.setServiceKey(properties.getProperty("service2.key"));
+        Map<String, Object> etcParam = new HashMap<String, Object>();
+        etcParam.put("LAWD_CD", "11110");
+        etcParam.put("DEAL_YMD", "201512");
+        //service.setItemTypeRef(new TypeReference<AedInfo>() {});
+
         ParamVO param = new ParamVO();
         param.setPageNo(1);
-        param.setNumOfRows(3);
-        ResponseVO<AedInfo> r = service.response(param);
-        //log.info(r.getBody().getItems().get(0).getClass().toString());
+        param.setNumOfRows(10);
+        param.setEtcParam(etcParam);
+
+        ResponseVO r = service.response(param);
+        log.info(r.getRequestUrl().toString());
         log.info(r.getBody().getItems().toString());
+
+
+
+
     }
 }
