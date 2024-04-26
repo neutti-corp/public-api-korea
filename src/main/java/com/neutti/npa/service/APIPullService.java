@@ -2,6 +2,7 @@ package com.neutti.npa.service;
 
 
 import com.neutti.npa.vo.ParamVO;
+import com.neutti.npa.vo.ResultVO;
 import com.neutti.npa.vo.data_go.ResponseVO;
 
 import java.net.URL;
@@ -14,7 +15,7 @@ public interface APIPullService<T> {
      * @param servicePath
      * @return
      */
-    public ResponseVO<T> response(String serviceKey, String apiNum, String reqPath, String servicePath);
+    public ResultVO<T> response(String serviceKey, String apiNum, String reqPath, String servicePath);
 
     /**
      *
@@ -22,6 +23,6 @@ public interface APIPullService<T> {
      * @param url : full request url
      * @return
      */
-    public ResponseVO<T> response(String serviceKey, URL url);
-    public ResponseVO<T> response(ParamVO param);
+    public ResultVO<T> response(String serviceKey, URL url);
+    public ResultVO<T> response(ParamVO param);
 }

@@ -98,8 +98,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version> <!-- Use a version compatible with your Java version -->
         <configuration>
-          <source>1.8</source> <!-- Change to your project's Java version -->
-          <target>1.8</target> <!-- Change to your project's Java version -->
+          <source>8</source> <!-- Change to your project's Java version -->
+          <target>8</target> <!-- Change to your project's Java version -->
         </configuration>
       </plugin>
       <plugin>

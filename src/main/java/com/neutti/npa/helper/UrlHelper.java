@@ -62,7 +62,12 @@ public class UrlHelper {
 
         Map<String, Object> etcParam = param.getEtcParam();
         for(Object key : etcParam.keySet() ){
-            urlBuilder.append(key).append("=").append(etcParam.get(key)).append("&");
+            Object value = etcParam.get(key);
+            if(value instanceof String){
+                urlBuilder.append(key).append("=").append(URLEncoder.encode(String.valueOf(value), "utf-8")).append("&");
+            }else{
+                urlBuilder.append(key).append("=").append(value).append("&");
+            }
         }
 
     }

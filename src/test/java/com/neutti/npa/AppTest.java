@@ -9,6 +9,7 @@ import com.neutti.npa.korea.EximApiService;
 import com.neutti.npa.korea.MolitApiService;
 import com.neutti.npa.vo.HostType;
 import com.neutti.npa.vo.ParamVO;
+import com.neutti.npa.vo.ResultVO;
 import com.neutti.npa.vo.data_go.ResponseVO;
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +52,7 @@ public class AppTest extends TestCase {
 
         ResponseVO<AedInfo> r = service.response(param);
         log.info(r.getRequestUrl().toString());
-        log.info(r.getBody().getItems().toString());
+        log.info(r.getHeader().toString());
     }
 
     public void test2() {
@@ -80,7 +81,7 @@ public class AppTest extends TestCase {
         etcParam.put("data", "AP01");
         ParamVO param = new ParamVO();
         param.setEtcParam(etcParam);
-        ResponseVO<Map> r = service.response(param);
+        ResultVO<Map> r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getItems().toString());
 
@@ -96,10 +97,7 @@ public class AppTest extends TestCase {
         HashMap<String, Object> etcParam = new HashMap<String, Object>();
         etcParam.put("sidoName", "서울");
         etcParam.put("ver", "1.0");
-        etcParam.put("returnType", "xml");
         param.setEtcParam(etcParam);
-
-
         ResponseVO<Map> r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getBody().getItems().toString());
