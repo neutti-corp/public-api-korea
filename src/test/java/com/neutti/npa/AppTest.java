@@ -2,6 +2,7 @@ package com.neutti.npa;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.external.B552657.AedInfo;
+import com.neutti.npa.external.OpenAPI_ToolInstallPackage.RTMSData;
 import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.korea.DataApiService;
 import com.neutti.npa.korea.DataGGApiService;
@@ -54,18 +55,18 @@ public class AppTest extends TestCase {
     }
 
     public void test2() {
-        DataApiService service = DataApiService.getInstance();
+        DataApiService<RTMSData> service = DataApiService.getInstance();
         service.setPath(properties.getProperty("service2.path"));
         service.setServiceKey(properties.getProperty("service2.key"));
         Map<String, Object> etcParam = new HashMap<String, Object>();
         etcParam.put("LAWD_CD", "11110");
         etcParam.put("DEAL_YMD", "201512");
-        //service.setItemTypeRef(new TypeReference<AedInfo>() {});
+        service.setItemTypeRef(new TypeReference<RTMSData>() {});
         ParamVO param = new ParamVO();
         param.setPageNo(1);
         param.setNumOfRows(10);
         param.setEtcParam(etcParam);
-        ResponseVO r = service.response(param);
+        ResponseVO<RTMSData> r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getBody().getItems().toString());
 
