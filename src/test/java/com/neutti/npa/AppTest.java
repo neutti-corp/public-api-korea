@@ -54,19 +54,17 @@ public class AppTest extends TestCase {
     }
 
     public void test2() {
-        MolitApiService service = MolitApiService.getInstance();
+        DataApiService service = DataApiService.getInstance();
         service.setPath(properties.getProperty("service2.path"));
         service.setServiceKey(properties.getProperty("service2.key"));
         Map<String, Object> etcParam = new HashMap<String, Object>();
         etcParam.put("LAWD_CD", "11110");
         etcParam.put("DEAL_YMD", "201512");
         //service.setItemTypeRef(new TypeReference<AedInfo>() {});
-
         ParamVO param = new ParamVO();
         param.setPageNo(1);
         param.setNumOfRows(10);
         param.setEtcParam(etcParam);
-
         ResponseVO r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getBody().getItems().toString());

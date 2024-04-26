@@ -17,10 +17,13 @@ public class UrlHelper {
         String targertUrl = "";
         switch (type){
             case DATA_GO:   /* 공공데이터 포털 */
-                targertUrl = "apis.data.go.kr";
+                if(path.contains("OpenAPI_ToolInstallPackage")){
+                    /* 국토교통부 */
+                    targertUrl = "openapi.molit.go.kr";
+                }else{
+                    targertUrl = "apis.data.go.kr";
+                }
                 break;
-            case MOLIT: /* 국토교통부 */
-                targertUrl = "openapi.molit.go.kr";
             case DATA_GG:
                 break;
             case DATA_SEOUL:
