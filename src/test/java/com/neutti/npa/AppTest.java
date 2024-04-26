@@ -98,7 +98,7 @@ public class AppTest extends TestCase {
         etcParam.put("sidoName", "서울");
         etcParam.put("ver", "1.0");
         param.setEtcParam(etcParam);
-        ResponseVO<Map> r = service.response(param);
+        ResponseVO r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getBody().getItems().toString());
 
