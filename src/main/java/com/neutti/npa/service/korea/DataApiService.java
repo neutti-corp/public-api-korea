@@ -1,12 +1,11 @@
-package com.neutti.npa.korea;
+package com.neutti.npa.service.korea;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.neutti.npa.external.B552657.AedInfo;
 import com.neutti.npa.helper.CallHelper;
-import com.neutti.npa.service.APIPullService;
+import com.neutti.npa.NService;
 import com.neutti.npa.vo.HostType;
-import com.neutti.npa.vo.ParamVO;
-import com.neutti.npa.vo.data_go.ResponseVO;
+import com.neutti.npa.NParamVO;
+import com.neutti.npa.vo.data_go.DataResponseVO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +16,7 @@ import java.net.URL;
  */
 @Slf4j
 @Data
-public class DataApiService<T> implements APIPullService<T> {
+public class DataApiService<T> implements NService<T> {
     protected DataApiService(){}
     public static <E> DataApiService<E> getInstance() {
         return new DataApiService<>();
@@ -26,25 +25,25 @@ public class DataApiService<T> implements APIPullService<T> {
     private String path;
     private String serviceKey;
     private TypeReference<T> itemTypeRef;
-    private ParamVO param;
+    private NParamVO param;
     @Override
-    public ResponseVO<T> response(String serviceKey, String apiNum, String reqPath, String servicePath) {
+    public DataResponseVO<T> response(String serviceKey, String apiNum, String reqPath, String servicePath) {
         return null;
     }
 
     @Override
-    public ResponseVO<T> response(String serviceKey, URL url) {
+    public DataResponseVO<T> response(String serviceKey, URL url) {
         return null;
     }
 
     @Override
-    public ResponseVO<T> response(ParamVO param) {
+    public DataResponseVO<T> response(NParamVO param) {
         if(itemTypeRef == null) {
             log.warn("ItemTypeRef 이 선언이 안 되있을 경우 항목(Item) 객체는 Map 형태로 변환됩니다.");
         }
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
-        ResponseVO<T> r = call.load(hostType, path, param, itemTypeRef);
+        DataResponseVO<T> r = call.load(hostType, path, param, itemTypeRef);
         return r;
     }
 }

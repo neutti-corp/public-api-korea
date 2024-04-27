@@ -1,7 +1,7 @@
 package com.neutti.npa.helper;
 
 import com.neutti.npa.vo.HostType;
-import com.neutti.npa.vo.ParamVO;
+import com.neutti.npa.NParamVO;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class UrlHelper {
 
-    public URL generate(HostType type, String path, ParamVO param) throws MalformedURLException, UnsupportedEncodingException {
+    public URL generate(HostType type, String path, NParamVO param) throws MalformedURLException, UnsupportedEncodingException {
         StringBuilder urlBuilder = new StringBuilder();
         String targertUrl = "";
         String keyName = "serviceKey";
@@ -41,7 +41,7 @@ public class UrlHelper {
         return new URL(urlBuilder.toString());
     }
 
-    private void setupUrlBuilder (StringBuilder urlBuilder, String path, String targetUrl, ParamVO param, String keyName) throws UnsupportedEncodingException {
+    private void setupUrlBuilder (StringBuilder urlBuilder, String path, String targetUrl, NParamVO param, String keyName) throws UnsupportedEncodingException {
 
         if(path.startsWith("http://" + targetUrl)){
             path = path.replace("http://" + targetUrl,"");

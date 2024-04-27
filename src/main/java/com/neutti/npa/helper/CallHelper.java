@@ -6,14 +6,12 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.neutti.npa.vo.HostType;
-import com.neutti.npa.vo.ParamVO;
-import com.neutti.npa.vo.ResultVO;
-import com.neutti.npa.vo.data_go.ResponseVO;
+import com.neutti.npa.NParamVO;
+import com.neutti.npa.NResultVO;
+import com.neutti.npa.vo.data_go.DataResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -22,9 +20,9 @@ import java.util.List;
 @Slf4j
 public class CallHelper {
 
-    public <T> ResponseVO<T> load(HostType type, String path, ParamVO param, TypeReference<T> typeRef) {
+    public <T> DataResponseVO<T> load(HostType type, String path, NParamVO param, TypeReference<T> typeRef) {
         HttpURLConnection conn = null;
-        ResponseVO<T> result = null;
+        DataResponseVO<T> result = null;
         String responseString = "";
 
         try {
@@ -57,10 +55,10 @@ public class CallHelper {
                 }
                 JavaType _typeRef = null;
                 if (typeRef == null) {
-                    _typeRef = mapper.getTypeFactory().constructType(new TypeReference<ResponseVO<T>>() {});
+                    _typeRef = mapper.getTypeFactory().constructType(new TypeReference<DataResponseVO<T>>() {});
                 } else {
                     JavaType _type = mapper.getTypeFactory().constructType(typeRef.getType());
-                    _typeRef = mapper.getTypeFactory().constructParametricType(ResponseVO.class, _type);
+                    _typeRef = mapper.getTypeFactory().constructParametricType(DataResponseVO.class, _type);
                 }
                 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
@@ -68,12 +66,12 @@ public class CallHelper {
                 result.setRequestUrl(url);
                 return result;
             } else {
-                result = new ResponseVO<>();
+                result = new DataResponseVO<>();
                 return result;
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            result = new ResponseVO<>();
+            result = new DataResponseVO<>();
             return result;
         } finally {
             if (conn != null) {
@@ -82,9 +80,9 @@ public class CallHelper {
         }
     }
 
-    public <T> ResultVO<T> loadItem(HostType type, String path, ParamVO param, TypeReference<T> typeRef) {
+    public <T> NResultVO<T> loadItem(HostType type, String path, NParamVO param, TypeReference<T> typeRef) {
         HttpURLConnection conn = null;
-        ResponseVO<T> result = null;
+        DataResponseVO<T> result = null;
         String responseString = "";
         try {
             UrlHelper urlHelper = new UrlHelper();
@@ -129,17 +127,17 @@ public class CallHelper {
                 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
                 List<T> items = mapper.readValue(responseString, _typeRef);
-                result = new ResponseVO<>();
+                result = new DataResponseVO<>();
                 result.setItems(items);
                 result.setRequestUrl(url);
                 return result;
             } else {
-                result = new ResponseVO<>();
+                result = new DataResponseVO<>();
                 return result;
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            result = new ResponseVO<>();
+            result = new DataResponseVO<>();
             return result;
         } finally {
             if (conn != null) {

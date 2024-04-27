@@ -1,4 +1,4 @@
-package com.neutti.npa.vo;
+package com.neutti.npa;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
-public class ParamVO {
+public class NParamVO {
     /* api url */
     private String url;
     /* api serviceKey */

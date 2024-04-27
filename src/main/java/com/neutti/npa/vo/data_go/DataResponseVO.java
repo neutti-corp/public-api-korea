@@ -1,13 +1,12 @@
 package com.neutti.npa.vo.data_go;
 
-import com.neutti.npa.vo.ResultVO;
+import com.neutti.npa.NResultVO;
 import lombok.Data;
 
 import java.net.URL;
-import java.util.List;
 
 @Data
-public class ResponseVO<T> extends ResultVO<T> {
+public class DataResponseVO<T> extends NResultVO<T> {
     private URL requestUrl;
     private HeaderVO header;
     private ErrHeaderVO cmmMsgHeader;

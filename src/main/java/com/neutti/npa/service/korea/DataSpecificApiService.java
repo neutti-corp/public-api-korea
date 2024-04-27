@@ -1,4 +1,4 @@
-package com.neutti.npa.korea;
+package com.neutti.npa.service.korea;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.neutti.npa.helper.NHelper;
