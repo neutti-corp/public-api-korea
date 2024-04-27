@@ -1,5 +1,5 @@
-package com.neutti.npa.vo;
+package com.neutti.npa;
 
-public enum HostType {
+public enum NHostType {
     DATA_GO, DATA_GG, DATA_SEOUL, VWORLD, MOLIT, EXIM
 }

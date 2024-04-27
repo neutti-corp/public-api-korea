@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.neutti.npa.vo.HostType;
+import com.neutti.npa.NHostType;
 import com.neutti.npa.NParamVO;
 import com.neutti.npa.NResultVO;
 import com.neutti.npa.vo.data_go.DataResponseVO;
@@ -20,7 +20,10 @@ import java.util.List;
 @Slf4j
 public class CallHelper {
 
-    public <T> DataResponseVO<T> load(HostType type, String path, NParamVO param, TypeReference<T> typeRef) {
+    public <T> DataResponseVO<T> load(NHostType type, String path, NParamVO param, TypeReference<T> typeRef) {
+        if(typeRef == null) {
+            log.warn("DataTypeRef 이 선언이 안 되있을 경우 항목(Data) 객체는 Map 형태로 변환됩니다.");
+        }
         HttpURLConnection conn = null;
         DataResponseVO<T> result = null;
         String responseString = "";
@@ -64,6 +67,7 @@ public class CallHelper {
                 mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
                 result = mapper.readValue(responseString, _typeRef);
                 result.setRequestUrl(url);
+                result.setData(result.getBody().getItems());
                 return result;
             } else {
                 result = new DataResponseVO<>();
@@ -80,7 +84,7 @@ public class CallHelper {
         }
     }
 
-    public <T> NResultVO<T> loadItem(HostType type, String path, NParamVO param, TypeReference<T> typeRef) {
+    public <T> NResultVO<T> loadItem(NHostType type, String path, NParamVO param, TypeReference<T> typeRef) {
         HttpURLConnection conn = null;
         DataResponseVO<T> result = null;
         String responseString = "";
@@ -128,7 +132,7 @@ public class CallHelper {
                 mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
                 List<T> items = mapper.readValue(responseString, _typeRef);
                 result = new DataResponseVO<>();
-                result.setItems(items);
+                result.setData(items);
                 result.setRequestUrl(url);
                 return result;
             } else {

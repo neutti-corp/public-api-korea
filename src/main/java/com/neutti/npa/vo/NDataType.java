@@ -1,5 +1,5 @@
 package com.neutti.npa.vo;
 
-public enum DataType {
+public enum NDataType {
     JSON, XML, FILE, EXCEL
 }

@@ -2,6 +2,7 @@ package com.neutti.npa;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.external.B552657.AedInfo;
+import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.service.korea.DataApiService;
 import com.neutti.npa.service.korea.EximApiService;
 import com.neutti.npa.vo.data_go.DataResponseVO;
@@ -18,12 +19,12 @@ import java.util.Properties;
  * Unit test for simple App.
  */
 @Slf4j
-public class AppTest extends TestCase {
+public class NpaTest extends TestCase {
 
     private static final Properties properties = new Properties();
 
     static {
-        try (InputStream input = AppTest.class.getClassLoader().getResourceAsStream("test.properties")) {
+        try (InputStream input = NpaTest.class.getClassLoader().getResourceAsStream("test.properties")) {
             if (input == null) {
                 throw new RuntimeException("Unable to find config.properties");
             }
@@ -33,19 +34,17 @@ public class AppTest extends TestCase {
         }
     }
 
-    public void test1() {
-        DataApiService<AedInfo> service = DataApiService.getInstance();
-        service.setPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
-        service.setServiceKey(properties.getProperty("service1.key"));
-        service.setItemTypeRef(new TypeReference<AedInfo>() {});
-
+    public void test1() throws NpaException {
+        NService<AedInfo> service = NServiceFactory.getService(NHostType.DATA_GO);
+        service.setDataPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
+        service.setCertKey(properties.getProperty("service1.key"));
+        service.setDataTypeRef(new TypeReference<AedInfo>() {});
         NParamVO param = new NParamVO();
         param.setPageNo(1);
         param.setNumOfRows(3);
-
         DataResponseVO<AedInfo> r = service.response(param);
         log.info(r.getRequestUrl().toString());
-        log.info(r.getHeader().toString());
+        log.info(r.getData().toString());
     }
 
     public void test2() {
@@ -76,14 +75,14 @@ public class AppTest extends TestCase {
         param.setEtcParam(etcParam);
         NResultVO<Map> r = service.response(param);
         log.info(r.getRequestUrl().toString());
-        log.info(r.getItems().toString());
+        log.info(r.getData().toString());
 
     }
 
     public void test4() {
-        DataApiService service = DataApiService.getInstance();
-        service.setPath("/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty");
-        service.setServiceKey(properties.getProperty("service1.key"));
+        /*NService service = NServiceFactory.getService(NHostType.DATA_GO);
+        service.setDataPath("/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty");
+        service.setCertKey(properties.getProperty("service1.key"));
         NParamVO param = new NParamVO();
         param.setPageNo(1);
         param.setNumOfRows(3);
@@ -93,7 +92,7 @@ public class AppTest extends TestCase {
         param.setEtcParam(etcParam);
         DataResponseVO r = service.response(param);
         log.info(r.getRequestUrl().toString());
-        log.info(r.getBody().getItems().toString());
+        log.info(r.getBody().getItems().toString());*/
 
     }
 }

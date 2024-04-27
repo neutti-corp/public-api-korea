@@ -2,7 +2,7 @@ package com.neutti.npa.service.korea;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.NService;
-import com.neutti.npa.vo.HostType;
+import com.neutti.npa.NHostType;
 import com.neutti.npa.NParamVO;
 import com.neutti.npa.vo.data_go.DataResponseVO;
 import lombok.Data;
@@ -18,18 +18,24 @@ public class DataGGApiService<T> implements NService {
     public static <E> DataGGApiService<E> getInstance() {
         return new DataGGApiService<>();
     }
-    private final HostType hostType = HostType.DATA_GG;
+    private final NHostType hostType = NHostType.DATA_GG;
     private String path1;
     private String serviceKey1;
     private TypeReference<T> itemTypeRef;
+
     @Override
-    public DataResponseVO response(String serviceKey, String apiNum, String reqPath, String servicePath) {
-        return null;
+    public void setDataPath(String path) {
+
     }
 
     @Override
-    public DataResponseVO response(String serviceKey, URL url) {
-        return null;
+    public void setCertKey(String key) {
+
+    }
+
+    @Override
+    public void setDataTypeRef(TypeReference dataTypeRef) {
+
     }
 
     @Override

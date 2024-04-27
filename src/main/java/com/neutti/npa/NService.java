@@ -1,24 +1,14 @@
 package com.neutti.npa;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import lombok.Data;
+
 import java.net.URL;
 
 public interface NService<T> {
-    /**
-     *
-     * @param serviceKey
-     * @param reqPath
-     * @param servicePath
-     * @return
-     */
-    public NResultVO<T> response(String serviceKey, String apiNum, String reqPath, String servicePath);
-
-    /**
-     *
-     * @param serviceKey
-     * @param url : full request url
-     * @return
-     */
-    public NResultVO<T> response(String serviceKey, URL url);
-    public NResultVO<T> response(NParamVO param);
+    void setDataPath(String dataPath);
+    void setCertKey(String certKey);
+    void setDataTypeRef(TypeReference<T> dataTypeRef);
+    <E extends NResultVO<T>> E response(NParamVO param);
 }

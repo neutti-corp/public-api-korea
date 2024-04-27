@@ -1,5 +1,6 @@
 package com.neutti.npa.service.korea;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.NService;
 import com.neutti.npa.NParamVO;
 import com.neutti.npa.vo.data_go.DataResponseVO;
@@ -11,13 +12,18 @@ import java.net.URL;
  */
 public class DataSeoulApiService implements NService {
     @Override
-    public DataResponseVO response(String serviceKey, String apiNum, String reqPath, String servicePath) {
-        return null;
+    public void setDataPath(String path) {
+
     }
 
     @Override
-    public DataResponseVO response(String serviceKey, URL url) {
-        return null;
+    public void setCertKey(String key) {
+
+    }
+
+    @Override
+    public void setDataTypeRef(TypeReference dataTypeRef) {
+
     }
 
     @Override

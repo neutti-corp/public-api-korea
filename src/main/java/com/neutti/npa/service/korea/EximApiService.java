@@ -3,7 +3,7 @@ package com.neutti.npa.service.korea;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.NService;
-import com.neutti.npa.vo.HostType;
+import com.neutti.npa.NHostType;
 import com.neutti.npa.NParamVO;
 import com.neutti.npa.NResultVO;
 import lombok.Data;
@@ -19,26 +19,30 @@ public class EximApiService<T> implements NService<T> {
     public static <E> EximApiService<E> getInstance() {
         return new EximApiService<>();
     }
-    private final HostType hostType = HostType.EXIM;
+    private final NHostType hostType = NHostType.EXIM;
     private String path;
     private String serviceKey;
     private TypeReference<T> itemTypeRef;
     private NParamVO param;
+
     @Override
-    public NResultVO<T> response(String serviceKey, String apiNum, String reqPath, String servicePath) {
-        return null;
+    public void setDataPath(String path) {
+setPath(path);
     }
 
     @Override
-    public NResultVO<T> response(String serviceKey, URL url) {
-        return null;
+    public void setCertKey(String key) {
+setServiceKey(key);
     }
+
+    @Override
+    public void setDataTypeRef(TypeReference<T> dataTypeRef) {
+        setItemTypeRef(dataTypeRef);
+    }
+
 
     @Override
     public NResultVO<T> response(NParamVO param) {
-        if(itemTypeRef == null) {
-            log.warn("ItemTypeRef 이 선언이 안 되있을 경우 항목(Item) 객체는 Map 형태로 변환됩니다.");
-        }
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
         NResultVO<T> r = call.loadItem(hostType, path, param, itemTypeRef);
