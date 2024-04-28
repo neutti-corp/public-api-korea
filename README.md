@@ -1,4 +1,4 @@
-# Public API - Korea
+# Public API Bridge - 한국
 
 # 홈페이지 (오픈예정)
 https://npa-home.com
