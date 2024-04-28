@@ -49,7 +49,8 @@ public class NpaTest {
     @Test
     public void getRTMSDataSvcAptTradeDev() throws NpaException {
         NService<RTMSData> service = NServiceFactory.getService(NHostType.DATA_GO);
-        service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
+        //service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
+        service.setDataPath("http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
         service.setCertKey(properties.getProperty("service2.key"));
         service.setDataTypeRef(new TypeReference<RTMSData>() {});
         NParamVO param = new NParamVO();
