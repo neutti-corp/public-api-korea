@@ -36,7 +36,9 @@ public class NpaTest {
             log.error("Error loading properties", ex);
         }
     }
-
+    /**
+     * 국립중앙의료원_전국 자동심장충격기(AED) 정보 조회 서비스
+     */
     @Test
     public void test1() throws NpaException {
         NService<AedInfo> service = NServiceFactory.getService(NHostType.DATA_GO);
@@ -47,8 +49,11 @@ public class NpaTest {
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
     }
+    /**
+     * 국토교통부_아파트매매 실거래 상세 자료
+     */
     @Test
-    public void test2() throws NpaException {
+    public void getRTMSDataSvcAptTradeDev() throws NpaException {
         NService<RTMSData> service = NServiceFactory.getService(NHostType.DATA_GO);
         service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
         service.setCertKey(properties.getProperty("service2.key"));
@@ -59,7 +64,6 @@ public class NpaTest {
         NResultVO<RTMSData> r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
-
     }
     @Test
     public void test3() throws NpaException {
