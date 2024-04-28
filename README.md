@@ -44,17 +44,9 @@ public enum NHostType {
      */
     DATA_GG,
     /**
-     * <a href="https://data.seoul.go.kr/">서울열린데이터광장</a>
-     */
-    DATA_SEOUL,
-    /**
      * <a href="https://www.vworld.kr/dev/v4api.do">디지털트윈국토</a>
      */
     VWORLD,
-    /**
-     * <a href="http://openapi.molit.go.kr/">국토교통부</a>
-     */
-    MOLIT,
     /**
      * <a href="https://www.koreaexim.go.kr/ir/HPHKIR019M01">한국수출입은행</a>
      */
