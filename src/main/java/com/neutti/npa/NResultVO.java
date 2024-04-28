@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class NResultVO<T> {
     private URL requestUrl;
-    private String responseCode;
+    private Integer responseCode;
     private String resultCode;
     private String resultMessage;
     private Boolean error;
