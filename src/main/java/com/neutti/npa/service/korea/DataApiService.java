@@ -44,6 +44,9 @@ public class DataApiService<T> implements NService<T> {
 
     @Override
     public DataResponseVO<T> response(NParamVO param) {
+        if(param == null){
+            param = new NParamVO();
+        }
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
         DataResponseVO<T> r = call.load(hostType, path, param, itemTypeRef);

@@ -43,6 +43,9 @@ setServiceKey(key);
 
     @Override
     public NResultVO<T> response(NParamVO param) {
+        if(param == null){
+            param = new NParamVO();
+        }
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
         NResultVO<T> r = call.loadItem(hostType, path, param, itemTypeRef);

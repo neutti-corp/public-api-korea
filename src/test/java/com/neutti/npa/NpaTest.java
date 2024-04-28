@@ -43,10 +43,7 @@ public class NpaTest {
         service.setDataPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
         service.setCertKey(properties.getProperty("service1.key"));
         service.setDataTypeRef(new TypeReference<AedInfo>() {});
-        NParamVO param = new NParamVO();
-        param.setPageNo(1);
-        param.setNumOfRows(3);
-        DataResponseVO<AedInfo> r = service.response(param);
+        DataResponseVO<AedInfo> r = service.response(null);
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
     }
@@ -55,14 +52,10 @@ public class NpaTest {
         NService<RTMSData> service = NServiceFactory.getService(NHostType.DATA_GO);
         service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
         service.setCertKey(properties.getProperty("service2.key"));
-        Map<String, Object> etcParam = new HashMap<String, Object>();
-        etcParam.put("LAWD_CD", "11110");
-        etcParam.put("DEAL_YMD", "201512");
         service.setDataTypeRef(new TypeReference<RTMSData>() {});
         NParamVO param = new NParamVO();
-        param.setPageNo(1);
-        param.setNumOfRows(10);
-        param.setEtcParam(etcParam);
+        param.add("LAWD_CD", "11110");
+        param.add("DEAL_YMD", "201512");
         NResultVO<RTMSData> r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
@@ -73,10 +66,8 @@ public class NpaTest {
         NService service = NServiceFactory.getService(NHostType.EXIM);
         service.setDataPath("/site/program/financial/exchangeJSON");
         service.setCertKey(properties.getProperty("service3.key"));
-        Map<String, Object> etcParam = new HashMap<String, Object>();
-        etcParam.put("data", "AP01");
         NParamVO param = new NParamVO();
-        param.setEtcParam(etcParam);
+        param.add("data", "AP01");
         NResultVO r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
@@ -88,12 +79,8 @@ public class NpaTest {
         service.setDataPath("/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty");
         service.setCertKey(properties.getProperty("service1.key"));
         NParamVO param = new NParamVO();
-        param.setPageNo(1);
-        param.setNumOfRows(3);
-        HashMap<String, Object> etcParam = new HashMap<String, Object>();
-        etcParam.put("sidoName", "서울");
-        etcParam.put("ver", "1.0");
-        param.setEtcParam(etcParam);
+        param.add("sidoName", "서울");
+        param.add("ver", "1.0");
         NResultVO r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
