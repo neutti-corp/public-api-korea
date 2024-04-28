@@ -52,7 +52,7 @@ public class SampleTest {
         // AedInfo VO 사용
         service.setDataTypeRef(new TypeReference<AedInfo>() {});
         NParamVO param = new NParamVO();
-        DataResponseVO<AedInfo> r = service.response(param);
+        NResultVO<AedInfo> r = service.response(param);
         // result
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());

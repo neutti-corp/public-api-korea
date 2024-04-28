@@ -39,7 +39,7 @@ public class NpaTest {
         service.setDataPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
         service.setCertKey(properties.getProperty("service1.key"));
         service.setDataTypeRef(new TypeReference<AedInfo>() {});
-        DataResponseVO<AedInfo> r = service.response(null);
+        NResultVO<AedInfo> r = service.response(null);
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
     }
