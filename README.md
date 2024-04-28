@@ -1,6 +1,7 @@
 # Public API - Korea
 
 ## use
+### import
 ```xml
 <dependency>
     <groupId>com.neutti.npa</groupId>
@@ -8,23 +9,23 @@
     <version>0.1.3</version>
 </dependency>
 ```
-
+### sample code
 ```java
-    /**
-     * 국토교통부_아파트매매 실거래 상세 자료
-     */
-    @Test
-    public void getRTMSDataSvcAptTradeDev() throws NpaException {
-        NService service = NServiceFactory.getService(NHostType.DATA_GO);
-        service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
-        service.setCertKey(<발급서비스키>);
-        NParamVO param = new NParamVO();
-        param.add("LAWD_CD", "11110");
-        param.add("DEAL_YMD", "202312");
-        NResultVO r = service.response(param);
-        log.info(r.getRequestUrl().toString());
-        log.info(r.getData().toString());
-    }
+/**
+ * 국토교통부_아파트매매 실거래 상세 자료
+ */
+@Test
+public void getRTMSDataSvcAptTradeDev() throws NpaException {
+    NService service = NServiceFactory.getService(NHostType.DATA_GO);
+    service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
+    service.setCertKey(<발급서비스키>);
+    NParamVO param = new NParamVO();
+    param.add("LAWD_CD", "11110");
+    param.add("DEAL_YMD", "202312");
+    NResultVO r = service.response(param);
+    log.info(r.getRequestUrl().toString());
+    log.info(r.getData().toString());
+}
 ```
 ## site
 ### 공개 공공 API

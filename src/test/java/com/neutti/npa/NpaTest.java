@@ -60,7 +60,7 @@ public class NpaTest {
         service.setDataTypeRef(new TypeReference<RTMSData>() {});
         NParamVO param = new NParamVO();
         param.add("LAWD_CD", "11110");
-        param.add("DEAL_YMD", "201512");
+        param.add("DEAL_YMD", "202312");
         NResultVO<RTMSData> r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
