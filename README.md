@@ -1,10 +1,10 @@
 # Public API - Korea
 
-## 홈페이지 (오픈예정)
+# 홈페이지 (오픈예정)
 https://npa-home.com
 
-## 사용법
-### import
+# Installation 
+#### maven
 ```xml
 <dependency>
     <groupId>com.neutti.npa</groupId>
@@ -12,6 +12,10 @@ https://npa-home.com
     <version>0.1.3</version>
 </dependency>
 ```
+##### gradle
+    implementation 'com.neutti.npa:npa-korea:0.1.3'
+
+# Usage
 ### sample code
 ```java
 /**
@@ -31,7 +35,8 @@ public void getRTMSDataSvcAptTradeDev() throws NpaException {
     log.info(r.getData().toString());
 }
 ```
-## 지원사이트(계속추가)
+
+# 지원사이트(계속추가)
 ### 공개 공공 API
 ```java
 public enum NHostType {
@@ -55,4 +60,4 @@ public enum NHostType {
 ```
 ### 비공개 API 지원
 
-## category
+# Category
