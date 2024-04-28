@@ -1,4 +1,4 @@
-package com.neutti.npa.external.OpenAPI_ToolInstallPackage;
+package com.neutti.npa.external.M15057511;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

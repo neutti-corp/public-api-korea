@@ -2,19 +2,13 @@ package com.neutti.npa;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.external.B552657.AedInfo;
-import com.neutti.npa.external.OpenAPI_ToolInstallPackage.RTMSData;
-import com.neutti.npa.helper.CallHelper;
-import com.neutti.npa.service.korea.DataApiService;
-import com.neutti.npa.service.korea.EximApiService;
+import com.neutti.npa.external.M15057511.RTMSData;
 import com.neutti.npa.vo.data_go.DataResponseVO;
-import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 
