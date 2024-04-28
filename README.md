@@ -26,6 +26,8 @@ https://npa-home.com
 public void getRTMSDataSvcAptTradeDev() throws NpaException {
     NService service = NServiceFactory.getService(NHostType.DATA_GO);
     service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
+    // allow full url
+    service.setDataPath("http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
     service.setCertKey(<발급서비스키>);
     NParamVO param = new NParamVO();
     param.add("LAWD_CD", "11110");
