@@ -1,6 +1,9 @@
 # Public API - Korea
 
-## use
+## 홈페이지 (오픈예정)
+https://npa-home.com
+
+## 사용법
 ### import
 ```xml
 <dependency>
@@ -27,7 +30,7 @@ public void getRTMSDataSvcAptTradeDev() throws NpaException {
     log.info(r.getData().toString());
 }
 ```
-## site
+## 지원사이트(계속추가)
 ### 공개 공공 API
 ```java
 public enum NHostType {
