@@ -41,18 +41,18 @@ public class SampleTest {
     }
     /**
      * Possible General Type - 자체적으로 생성한 VO를 활용하세요.
-     * 국립중앙의료원_전국 자동심장충격기(AED) 정보 조회 서비스
-     * https://www.data.go.kr/data/15000652/openapi.do
      */
     @Test
-    public void getAedLcinfoInqire() throws NpaException {
-        NService<AedInfo> service = NServiceFactory.getService(NHostType.DATA_GO);
-        service.setDataPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
+    public void getRTMSDataSvcAptTradeDev_WithType() throws NpaException {
+        NService<RTMSData> service = NServiceFactory.getService(NHostType.DATA_GO);
+        service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
         service.setCertKey(/*발급서비스키*/);
-        // AedInfo VO 사용
-        service.setDataTypeRef(new TypeReference<AedInfo>() {});
+        // RTMSData VO 사용
+        service.setDataTypeRef(new TypeReference<RTMSData>() {});
         NParamVO param = new NParamVO();
-        NResultVO<AedInfo> r = service.response(param);
+        param.add("LAWD_CD", "11110");
+        param.add("DEAL_YMD", "202312");
+        NResultVO<RTMSData> r = service.response(param);
         // result
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
