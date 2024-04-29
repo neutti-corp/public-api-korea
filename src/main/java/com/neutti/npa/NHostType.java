@@ -25,8 +25,12 @@ public enum NHostType {
      * <a href="https://www.koreaexim.go.kr/ir/HPHKIR019M01">한국수출입은행</a>
      */
     EXIM,
-
+    /**
+     * <a href="http://api.sexoffender.go.kr/">여성가족부_성범죄자</a>
+     */
     SEX_OFFENDER,
-
+    /**
+     * <a href="http://www.kobis.or.kr/">영화 진흥 위원회</a>
+     */
     KOBIS
 }
