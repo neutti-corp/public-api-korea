@@ -1,5 +1,5 @@
 package com.neutti.npa;
 
 public enum NHostType {
-    DATA_GO, DATA_GG, DATA_SEOUL, VWORLD, MOLIT, EXIM
+    DATA_GO, DATA_GG, DATA_SEOUL, VWORLD, MOLIT, EXIM, SEX_OFFENDER, KOBIS
 }

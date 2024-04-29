@@ -28,6 +28,12 @@ public class UrlHelper {
             case EXIM:
                 targertUrl = "www.koreaexim.go.kr";
                 keyName = "authkey";
+            case SEX_OFFENDER:
+                targertUrl = "api.sexoffender.go.kr";
+                keyName = null;
+            case KOBIS:
+                targertUrl = "www.kobis.or.kr";
+                keyName = "key";
             case DATA_GG:
                 break;
             case DATA_SEOUL:
@@ -52,11 +58,14 @@ public class UrlHelper {
         urlBuilder.append("http://").append(targetUrl);
         if(!path.startsWith("/")) urlBuilder.append("/");
         urlBuilder.append(path).append("?");
-        if(URLDecoder.decode(param.getServiceKey(),"utf-8").equals(param.getServiceKey())){
-            urlBuilder.append(keyName).append("=").append(param.getServiceKey()).append("&");
-        }else{
-            urlBuilder.append(keyName).append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
+        if(keyName != null){
+            if(URLDecoder.decode(param.getServiceKey(),"utf-8").equals(param.getServiceKey())){
+                urlBuilder.append(keyName).append("=").append(param.getServiceKey()).append("&");
+            }else{
+                urlBuilder.append(keyName).append("=").append(URLEncoder.encode(param.getServiceKey(),"utf-8")).append("&");
+            }
         }
+
         urlBuilder.append("pageNo").append("=").append(param.getPageNo()).append("&");
         urlBuilder.append("numOfRows").append("=").append(param.getNumOfRows()).append("&");
 

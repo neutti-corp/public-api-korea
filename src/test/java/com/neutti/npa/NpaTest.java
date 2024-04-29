@@ -86,4 +86,42 @@ public class NpaTest {
         log.info(r.getData().toString());
 
     }
+    @Test
+    public void test5() throws NpaException {
+        NService service = NServiceFactory.getService(NHostType.DATA_GO);
+        service.setDataPath("/B090041/openapi/service/SpcdeInfoService/getHoliDeInfo");
+        service.setCertKey(properties.getProperty("service1.key"));
+        NParamVO param = new NParamVO();
+        param.add("solYear", "2015");
+        param.add("solMonth", "09");
+        NResultVO r = service.response(param);
+        log.info(r.getRequestUrl().toString());
+        log.info(r.getData().toString());
+
+    }
+    /* 여성가족부_성범죄자 지역별 통계 */
+    @Test
+    public void test6() throws NpaException {
+        NService service = NServiceFactory.getService(NHostType.SEX_OFFENDER);
+        service.setDataPath("/openapi/SOCitysStats");
+        NParamVO param = new NParamVO();
+        NResultVO r = service.response(param);
+        log.info(r.getRequestUrl().toString());
+        log.info(r.getData().toString());
+
+    }
+
+    @Test
+    public void test7() throws NpaException {
+        NService service = NServiceFactory.getService(NHostType.KOBIS);
+        service.setDataPath("/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.xml");
+        service.setCertKey(properties.getProperty("service5.key"));
+        NParamVO param = new NParamVO();
+        param.add("targetDt", "20120101");
+        NResultVO r = service.response(param);
+        log.info(r.getRequestUrl().toString());
+        log.info(r.getData().toString());
+
+    }
+
 }
