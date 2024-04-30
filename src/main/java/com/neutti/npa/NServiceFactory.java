@@ -1,10 +1,7 @@
 package com.neutti.npa;
 
 
-import com.neutti.npa.service.korea.DataApiService;
-import com.neutti.npa.service.korea.EximApiService;
-import com.neutti.npa.service.korea.KobisApiService;
-import com.neutti.npa.service.korea.SexOffenderApiService;
+import com.neutti.npa.service.korea.*;
 
 import java.net.URL;
 
@@ -19,6 +16,8 @@ public class NServiceFactory<T> {
                 return (E) SexOffenderApiService.getInstance();
             case KOBIS:
                 return (E) KobisApiService.getInstance();
+            case MOLIT:
+                return (E) MolitApiService.getInstance();
         }
         throw new NpaException("NHostType 을 지정해주세요.");
     }

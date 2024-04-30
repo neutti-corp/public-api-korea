@@ -34,6 +34,9 @@ public class UrlHelper {
             case KOBIS:
                 targertUrl = "www.kobis.or.kr";
                 keyName = "key";
+            case MOLIT:
+                targertUrl = "openapi.molit.go.kr";
+
             case DATA_GG:
                 break;
             case DATA_SEOUL:
