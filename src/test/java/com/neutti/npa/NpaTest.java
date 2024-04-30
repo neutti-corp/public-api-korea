@@ -37,7 +37,7 @@ public class NpaTest {
     public void test1() throws NpaException {
         NService<AedInfo> service = NServiceFactory.getService(NHostType.DATA_GO);
         service.setDataPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
-        service.setCertKey("123");
+        service.setCertKey(properties.getProperty("service1.key"));
         service.setDataTypeRef(new TypeReference<AedInfo>() {});
         NParamVO param = new NParamVO();
 //        param.add("stdr", "2018");
