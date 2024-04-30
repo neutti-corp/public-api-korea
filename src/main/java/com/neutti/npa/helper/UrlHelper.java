@@ -28,15 +28,18 @@ public class UrlHelper {
             case EXIM:
                 targertUrl = "www.koreaexim.go.kr";
                 keyName = "authkey";
+                break;
             case SEX_OFFENDER:
                 targertUrl = "api.sexoffender.go.kr";
                 keyName = null;
+                break;
             case KOBIS:
                 targertUrl = "www.kobis.or.kr";
                 keyName = "key";
+                break;
             case MOLIT:
                 targertUrl = "openapi.molit.go.kr";
-
+                break;
             case DATA_GG:
                 break;
             case DATA_SEOUL:

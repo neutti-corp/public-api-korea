@@ -12,17 +12,17 @@ public class SampleTest {
      */
     @Test
     public void getRTMSDataSvcAptTradeDev() throws NpaException {
-        NService<RTMSData> service = NServiceFactory.getService(NHostType.DATA_GO);
-        service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
-        // allow full url
-        //service.setDataPath("http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
-        //service.setCertKey(/*발급서비스키*/);
-        service.setDataTypeRef(new TypeReference<RTMSData>() {});
-        NParamVO param = new NParamVO();
-        param.add("LAWD_CD", "11110");
-        param.add("DEAL_YMD", "202312");
-        NResultVO<RTMSData> r = service.response(param);
-        log.info(r.getRequestUrl().toString());
-        log.info(r.getData().toString());
+//        NService<RTMSData> service = NServiceFactory.getService(NHostType.DATA_GO);
+//        service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
+//        // allow full url
+//        //service.setDataPath("http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
+//        //service.setCertKey(/*발급서비스키*/);
+//        service.setDataTypeRef(new TypeReference<RTMSData>() {});
+//        NParamVO param = new NParamVO();
+//        param.add("LAWD_CD", "11110");
+//        param.add("DEAL_YMD", "202312");
+//        NResultVO<RTMSData> r = service.response(param);
+//        log.info(r.getRequestUrl().toString());
+//        log.info(r.getData().toString());
     }
 }

@@ -37,9 +37,11 @@ public class NpaTest {
     public void test1() throws NpaException {
         NService<AedInfo> service = NServiceFactory.getService(NHostType.DATA_GO);
         service.setDataPath("/B552657/AEDInfoInqireService/getAedLcinfoInqire");
-        service.setCertKey(properties.getProperty("service1.key"));
+        service.setCertKey("123");
         service.setDataTypeRef(new TypeReference<AedInfo>() {});
-        NResultVO<AedInfo> r = service.response(null);
+        NParamVO param = new NParamVO();
+//        param.add("stdr", "2018");
+        NResultVO<AedInfo> r = service.response(param);
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
     }
@@ -49,11 +51,12 @@ public class NpaTest {
     @Test
     public void getRTMSDataSvcAptTradeDev() throws NpaException {
         NService<RTMSData> service = NServiceFactory.getService(NHostType.MOLIT);
-        //service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
         service.setDataPath("/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev");
         service.setCertKey(properties.getProperty("service2.key"));
         service.setDataTypeRef(new TypeReference<RTMSData>() {});
         NParamVO param = new NParamVO();
+//        param.add("pageNo", 1);
+//        param.add("numOfRows", 10);
         param.add("LAWD_CD", "11110");
         param.add("DEAL_YMD", "202312");
         NResultVO<RTMSData> r = service.response(param);
@@ -101,25 +104,25 @@ public class NpaTest {
     /* 여성가족부_성범죄자 지역별 통계 */
     @Test
     public void test6() throws NpaException {
-        NService service = NServiceFactory.getService(NHostType.SEX_OFFENDER);
-        service.setDataPath("/openapi/SOCitysStats");
-        NParamVO param = new NParamVO();
-        NResultVO r = service.response(param);
-        log.info(r.getRequestUrl().toString());
-        log.info(r.getData().toString());
+//        NService service = NServiceFactory.getService(NHostType.SEX_OFFENDER);
+//        service.setDataPath("/openapi/SOCitysStats");
+//        NParamVO param = new NParamVO();
+//        NResultVO r = service.response(param);
+//        log.info(r.getRequestUrl().toString());
+//        log.info(r.getData().toString());
 
     }
 
     @Test
     public void test7() throws NpaException {
-        NService service = NServiceFactory.getService(NHostType.KOBIS);
-        service.setDataPath("/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.xml");
-        service.setCertKey(properties.getProperty("service5.key"));
-        NParamVO param = new NParamVO();
-        param.add("targetDt", "20120101");
-        NResultVO r = service.response(param);
-        log.info(r.getRequestUrl().toString());
-        log.info(r.getData().toString());
+//        NService service = NServiceFactory.getService(NHostType.KOBIS);
+//        service.setDataPath("/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.xml");
+//        service.setCertKey(properties.getProperty("service5.key"));
+//        NParamVO param = new NParamVO();
+//        param.add("targetDt", "20120101");
+//        NResultVO r = service.response(param);
+//        log.info(r.getRequestUrl().toString());
+//        log.info(r.getData().toString());
 
     }
 

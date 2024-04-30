@@ -75,7 +75,6 @@ public class CallHelper {
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            result = new DataResponseVO<>();
             return result;
         } finally {
             if (conn != null) {
