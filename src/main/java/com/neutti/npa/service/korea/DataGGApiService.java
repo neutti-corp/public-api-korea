@@ -19,15 +19,18 @@ public class DataGGApiService<T> implements NService {
         return new DataGGApiService<>();
     }
     private final NHostType hostType = NHostType.DATA_GG;
-    private String path1;
-    private String serviceKey1;
+    private String path;
+    private String serviceKey;
     private TypeReference<T> itemTypeRef;
 
     @Override
     public void setDataPath(String path) {
 
     }
-
+    @Override
+    public void setDataPath(URL dataUrl) {
+        setPath(dataUrl.toString());
+    }
     @Override
     public void setCertKey(String key) {
 

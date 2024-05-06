@@ -9,6 +9,8 @@ import com.neutti.npa.helper.CallHelper;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.net.URL;
+
 /**
  * 여성가족부_성범죄자
  * @param <T>
@@ -31,7 +33,10 @@ public class SexOffenderApiService<T> implements NService<T> {
     public void setDataPath(String path) {
         setPath(path);
     }
-
+    @Override
+    public void setDataPath(URL dataUrl) {
+        setPath(dataUrl.toString());
+    }
     @Override
     public void setCertKey(String key) {
         setServiceKey(key);

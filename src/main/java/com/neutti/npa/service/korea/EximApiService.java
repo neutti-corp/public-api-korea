@@ -29,7 +29,10 @@ public class EximApiService<T> implements NService<T> {
     public void setDataPath(String path) {
 setPath(path);
     }
-
+    @Override
+    public void setDataPath(URL dataUrl) {
+        setPath(dataUrl.toString());
+    }
     @Override
     public void setCertKey(String key) {
 setServiceKey(key);
