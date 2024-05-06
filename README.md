@@ -9,11 +9,11 @@ https://npa-home.com
 <dependency>
     <groupId>com.neutti.npa</groupId>
     <artifactId>npa-korea</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4</version>
 </dependency>
 ```
 ##### gradle
-    implementation 'com.neutti.npa:npa-korea:0.1.3'
+    implementation 'com.neutti.npa:npa-korea:0.1.4'
 
 # Usage
 ### sample code
