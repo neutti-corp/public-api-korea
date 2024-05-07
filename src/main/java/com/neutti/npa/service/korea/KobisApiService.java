@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.formula.functions.T;
 
+import java.net.URL;
+
 /**
  * 영화 진흥 위원회
  * @param <T>
@@ -32,7 +34,10 @@ public class KobisApiService<T>  implements NService<T> {
     public void setDataPath(String path) {
         setPath(path);
     }
-
+    @Override
+    public void setDataPath(URL dataUrl) {
+        setPath(dataUrl.toString());
+    }
     @Override
     public void setCertKey(String key) {
         setServiceKey(key);

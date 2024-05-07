@@ -15,7 +15,10 @@ public class DataSeoulApiService implements NService {
     public void setDataPath(String path) {
 
     }
+    @Override
+    public void setDataPath(URL dataUrl) {
 
+    }
     @Override
     public void setCertKey(String key) {
 

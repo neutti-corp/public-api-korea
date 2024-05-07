@@ -8,6 +8,7 @@ import java.net.URL;
 
 public interface NService<T> {
     void setDataPath(String dataPath);
+    void setDataPath(URL dataUrl);
     void setCertKey(String certKey);
     void setDataTypeRef(TypeReference<T> dataTypeRef);
     <E extends NResultVO<T>> E response(NParamVO param);

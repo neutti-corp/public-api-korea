@@ -33,6 +33,11 @@ public class DataApiService<T> implements NService<T> {
     }
 
     @Override
+    public void setDataPath(URL dataUrl) {
+        setPath(dataUrl.toString());
+    }
+
+    @Override
     public void setCertKey(String key) {
         setServiceKey(key);
     }
