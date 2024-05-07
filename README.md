@@ -1,7 +1,7 @@
 # Public API Bridge - 한국
 
-# 홈페이지 (오픈예정)
-https://npa-home.com
+# 홈페이지 (작업중)
+http://npacode.com
 
 # Installation 
 #### maven
