@@ -117,7 +117,7 @@ public class CallHelper {
                 conn.setDefaultUseCaches(false);
                 String jsonInString = new ObjectMapper()
                         .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                        .writeValueAsString(param);
+                        .writeValueAsString(param.getEtcParam());
                 IOUtils.copy(IOUtils.toInputStream(jsonInString, "UTF-8"), conn.getOutputStream());
             }
             int responseCode = conn.getResponseCode();
