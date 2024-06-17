@@ -1,11 +1,8 @@
 package com.neutti.npa.service.korea;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.neutti.npa.*;
 import com.neutti.npa.helper.CallHelper;
-import com.neutti.npa.NService;
-import com.neutti.npa.NHostType;
-import com.neutti.npa.NParamVO;
-import com.neutti.npa.NResultVO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +40,10 @@ setServiceKey(key);
         setItemTypeRef(dataTypeRef);
     }
 
+    @Override
+    public void setRequestMethod(String requestMethod) throws NpaException {
 
+    }
     @Override
     public NResultVO<T> response(NParamVO param) {
         if(param == null){
@@ -51,7 +51,7 @@ setServiceKey(key);
         }
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
-        NResultVO<T> r = call.loadItem(hostType, path, param, itemTypeRef);
+        NResultVO<T> r = call.loadItem(hostType, path, null, param, itemTypeRef);
         return r;
     }
 }

@@ -1,6 +1,7 @@
 package com.neutti.npa.service.korea;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.neutti.npa.NpaException;
 import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.NService;
 import com.neutti.npa.NHostType;
@@ -37,6 +38,10 @@ public class MolitApiService<T> implements NService<T> {
         setPath(dataUrl.toString());
     }
     @Override
+    public void setRequestMethod(String requestMethod) throws NpaException {
+
+    }
+    @Override
     public void setCertKey(String key) {
         setServiceKey(key);
     }
@@ -49,7 +54,7 @@ public class MolitApiService<T> implements NService<T> {
     public DataResponseVO<T> response(NParamVO param) {
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
-        DataResponseVO<T> r = call.load(hostType, path, param, itemTypeRef);
+        DataResponseVO<T> r = call.load(hostType, path, "GET", param, itemTypeRef);
         return r;
     }
 }

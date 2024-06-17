@@ -1,10 +1,7 @@
 package com.neutti.npa.service.korea;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.neutti.npa.NHostType;
-import com.neutti.npa.NParamVO;
-import com.neutti.npa.NResultVO;
-import com.neutti.npa.NService;
+import com.neutti.npa.*;
 import com.neutti.npa.helper.CallHelper;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +25,11 @@ public class SexOffenderApiService<T> implements NService<T> {
     private String serviceKey;
     private TypeReference<T> itemTypeRef;
     private NParamVO param;
+
+    @Override
+    public void setRequestMethod(String requestMethod) throws NpaException {
+
+    }
 
     @Override
     public void setDataPath(String path) {
@@ -55,7 +57,7 @@ public class SexOffenderApiService<T> implements NService<T> {
         }
         CallHelper call = new CallHelper();
        // param.setServiceKey(serviceKey);
-        NResultVO<T> r = call.loadItem(hostType, path, param, itemTypeRef);
+        NResultVO<T> r = call.loadItem(hostType, path, null, param, itemTypeRef);
         return r;
     }
 }
