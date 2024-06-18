@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.neutti.npa.NHostType;
 import com.neutti.npa.NParamVO;
@@ -152,6 +153,7 @@ public class CallHelper {
                         JavaType _type = mapper.getTypeFactory().constructType(typeRef.getType());
                         _typeRef = mapper.getTypeFactory().constructParametricType(List.class, _type);
                     }
+                    mapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
                     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
                     List<T> items = mapper.readValue(responseString, _typeRef);
@@ -166,6 +168,7 @@ public class CallHelper {
                         JavaType _type = mapper.getTypeFactory().constructType(typeRef.getType());
                         _typeRef = mapper.getTypeFactory().constructParametricType(DataResponseVO.class, _type);
                     }
+                    mapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
                     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
                     result = mapper.readValue(responseString, _typeRef);
