@@ -4,7 +4,7 @@
     <description>could use public data in Korea more conveniently</description>
     <groupId>com.neutti.npa</groupId>
     <artifactId>npa-korea</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6</version>
     <packaging>jar</packaging>
 
     <developers>
@@ -39,8 +39,8 @@
         <developerConnection>scm:git:ssh://github.com:neutti-corp/public-api-korea.git</developerConnection>
     </scm>
 
-    <name>Neutti Public API Korea</name>
-    <url>http://neutti.com</url>
+  <name>Neutti Public API Korea</name>
+  <url>http://npacode.com/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,6 +85,7 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -5,8 +5,8 @@
             <pattern>%highlight(%-5level) - NPA - %msg%n</pattern>
         </encoder>
     </appender>
-
-    <root level="debug">
+    <logger name="com.neutti.npa" level="debug" />
+    <root level="off">
         <appender-ref ref="STDOUT"/>
     </root>
 
