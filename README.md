@@ -4,15 +4,31 @@
 https://npa-home.com
 
 # Installation 
-#### maven
+### maven
 ```xml
 <dependency>
     <groupId>com.neutti.npa</groupId>
     <artifactId>npa-korea</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6</version>
 </dependency>
 ```
-##### gradle
+###### When logback library crashes - 라이브러리 충돌시
+Caused by: java.lang.IllegalArgumentException: LoggerFactory is not a Logback LoggerContext but Logback is on the classpath.
+```xml
+<dependency>
+    <groupId>com.neutti.npa</groupId>
+    <artifactId>npa-korea</artifactId>
+    <version>0.1.6</version>
+    <exclusions>
+        <exclusion>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+### gradle
     implementation 'com.neutti.npa:npa-korea:0.1.5'
 
 # Usage
@@ -57,6 +73,24 @@ public class SampleTest {
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
     }
+    /**
+     * 비공개 API 적용 
+     */
+    @Test
+    public void getPrivateSensorData() throws NpaException {
+        NService<SensorVO> service = NServiceFactory.getPrivateService();
+        service.setDataPath(/* http 또는 https 로 시작하는 full url */);
+        service.setRequestMethod("POST");
+        service.setDataTypeRef(new TypeReference<SensorVO>() {});
+        NParamVO param = new NParamVO();
+        param.add("mea_date_start", "2023-07-24");
+        param.add("mea_date_end", "2023-07-25");
+        param.add("odev_sq", "4");
+        NResultVO<SensorVO> r = service.response(param);
+        // result
+        log.info(r.getRequestUrl().toString());
+        log.info(r.getData().toString());
+    }
 }
 ```
 
@@ -82,6 +116,5 @@ public enum NHostType {
     EXIM,
 }
 ```
-### 비공개 API 지원
 
 # Category
