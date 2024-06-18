@@ -29,7 +29,10 @@ Caused by: java.lang.IllegalArgumentException: LoggerFactory is not a Logback Lo
 ```
 
 ### gradle
-    implementation 'com.neutti.npa:npa-korea:0.1.5'
+    implementation 'com.neutti.npa:npa-korea:0.1.6'
+    compile ('com.neutti.npa:npa-korea:0.1.6') {
+        exclude group: "ch.qos.logback", module: "logback-classic"
+    }
 
 # Usage
 ### sample code
