@@ -19,14 +19,6 @@ import java.util.*;
 
 public class NHelper {
 
-    public static HashMap[] convertKeysToCamelCase(HashMap<String, Object>[] maps) {
-        return Arrays.stream(maps).map(map -> {
-            HashMap<String, Object> newMap = new HashMap<>();
-            map.forEach((key, value) -> newMap.put(toCamelCase(key), value));
-            return newMap;
-        }).toArray(HashMap[]::new);
-    }
-
     private static String toCamelCase(String key) {
         String[] parts = key.split("_");
         String rtrnString;
@@ -95,10 +87,7 @@ public class NHelper {
     }
 
     /**
-     * url => hashMap 데이터 얻기(json, xml)
-     * @param url
-     * @return
-     * @throws Exception
+     * url hashMap 데이터 얻기(json, xml)
      */
     public static HashMap<String, Object>[] getHashMapArrayDataFromUrlJson(String url) throws Exception{
         URL targetUrl = new URL(url);

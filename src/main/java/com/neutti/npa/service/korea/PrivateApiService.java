@@ -9,9 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
 
-/**
- * <a href="http://openapi.molit.go.kr/">국토교통부</a>
- */
+
 @Slf4j
 @Data
 public class PrivateApiService<T> implements NService<T> {
