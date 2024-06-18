@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.NService;
 import com.neutti.npa.NHostType;
 import com.neutti.npa.NParamVO;
+import com.neutti.npa.NpaException;
 import com.neutti.npa.vo.data_go.DataResponseVO;
 import lombok.Data;
 
@@ -25,6 +26,10 @@ public class DataGGApiService<T> implements NService {
 
     @Override
     public void setDataPath(String path) {
+
+    }
+    @Override
+    public void setRequestMethod(String requestMethod) throws NpaException {
 
     }
     @Override

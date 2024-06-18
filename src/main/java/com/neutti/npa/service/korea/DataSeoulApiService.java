@@ -3,6 +3,7 @@ package com.neutti.npa.service.korea;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.NService;
 import com.neutti.npa.NParamVO;
+import com.neutti.npa.NpaException;
 import com.neutti.npa.vo.data_go.DataResponseVO;
 
 import java.net.URL;
@@ -23,7 +24,10 @@ public class DataSeoulApiService implements NService {
     public void setCertKey(String key) {
 
     }
+    @Override
+    public void setRequestMethod(String requestMethod) throws NpaException {
 
+    }
     @Override
     public void setDataTypeRef(TypeReference dataTypeRef) {
 

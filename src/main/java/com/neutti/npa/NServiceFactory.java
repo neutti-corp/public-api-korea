@@ -21,4 +21,7 @@ public class NServiceFactory<T> {
         }
         throw new NpaException("NHostType 을 지정해주세요.");
     }
+    public static <E extends NService> E getPrivateService() throws NpaException {
+        return (E) PrivateApiService.getInstance();
+    }
 }

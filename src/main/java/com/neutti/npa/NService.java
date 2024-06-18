@@ -7,7 +7,8 @@ import lombok.Data;
 import java.net.URL;
 
 public interface NService<T> {
-    void setDataPath(String dataPath);
+    void setRequestMethod(String requestMethod) throws NpaException;
+    void setDataPath(String dataPath) throws NpaException;
     void setDataPath(URL dataUrl);
     void setCertKey(String certKey);
     void setDataTypeRef(TypeReference<T> dataTypeRef);

@@ -1,6 +1,7 @@
 package com.neutti.npa.service.korea;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.neutti.npa.NpaException;
 import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.NService;
 import com.neutti.npa.NHostType;
@@ -26,6 +27,11 @@ public class DataApiService<T> implements NService<T> {
     private String serviceKey;
     private TypeReference<T> itemTypeRef;
     private NParamVO param;
+
+    @Override
+    public void setRequestMethod(String requestMethod) throws NpaException {
+
+    }
 
     @Override
     public void setDataPath(String path) {
@@ -54,7 +60,7 @@ public class DataApiService<T> implements NService<T> {
         }
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
-        DataResponseVO<T> r = call.load(hostType, path, param, itemTypeRef);
+        DataResponseVO<T> r = call.load(hostType, path, "GET", param, itemTypeRef);
         return r;
     }
 }
