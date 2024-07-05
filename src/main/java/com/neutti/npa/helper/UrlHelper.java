@@ -60,15 +60,16 @@ public class UrlHelper {
         }else{
             if(path.startsWith("http://" + targetUrl)){
                 path = path.replace("http://" + targetUrl,"");
-            }
-            if(path.startsWith("https://" + targetUrl)){
+            }else if(path.startsWith("https://" + targetUrl)){
                 path = path.replace("https://" + targetUrl,"");
+            }else{
+                urlBuilder.append("http://").append(targetUrl);
             }
-            urlBuilder.append("http://").append(targetUrl);
-            if(!path.startsWith("/")) urlBuilder.append("/");
+            if(!path.startsWith("/"))
+                urlBuilder.append("/");
         }
         if(requestMethod.equalsIgnoreCase("GET")){
-            urlBuilder.append(path).append("?");
+            urlBuilder.append("?");
             if(keyName != null && param.getServiceKey() != null){
                 if(URLDecoder.decode(param.getServiceKey(),"utf-8").equals(param.getServiceKey())){
                     urlBuilder.append(keyName).append("=").append(param.getServiceKey()).append("&");

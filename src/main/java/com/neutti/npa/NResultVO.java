@@ -13,4 +13,5 @@ public class NResultVO<T> {
     private String resultMessage;
     private Boolean error;
     private List<T> data;
+    private T item;
 }
