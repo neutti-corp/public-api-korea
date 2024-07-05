@@ -133,6 +133,7 @@ public class CallHelper {
             result.setResponseCode(responseCode);
             if (responseCode >= 200 && responseCode <= 300) {
                 responseString = IOUtils.toString(conn.getInputStream(), StandardCharsets.UTF_8);
+                result.setResponseOriginalString(responseString);
                 String contentType = conn.getContentType();
                 boolean isJson = contentType != null && (contentType.contains("application/json") || contentType.contains("text/html"));
                 boolean isXml = contentType != null && (contentType.contains("application/xml") || contentType.contains("text/xml"));
@@ -169,10 +170,8 @@ public class CallHelper {
                     if (typeRef == null) {
                         _typeRef = mapper.getTypeFactory().constructType(new TypeReference<DataResponseVO<T>>() {});
                     } else {
-                        JavaType _type = mapper.getTypeFactory().constructType(typeRef.getType());
-                        _typeRef = mapper.getTypeFactory().constructParametricType(DataResponseVO.class, _type);
+                        _typeRef = mapper.getTypeFactory().constructType(typeRef.getType());
                     }
-                    _typeRef = mapper.getTypeFactory().constructType(typeRef.getType());
                     mapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
                     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     T _result = mapper.readValue(responseString, _typeRef);

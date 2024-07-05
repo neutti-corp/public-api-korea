@@ -11,6 +11,7 @@ public class NResultVO<T> {
     private Integer responseCode;
     private String resultCode;
     private String resultMessage;
+    private String responseOriginalString;
     private Boolean error;
     private List<T> data;
     private T item;
