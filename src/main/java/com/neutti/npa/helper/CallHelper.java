@@ -15,8 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -116,19 +118,29 @@ public class CallHelper {
             if(requestMethod.equalsIgnoreCase("GET")){
                 //conn.setInstanceFollowRedirects(false);
             }else{
-                conn.setRequestProperty("Content-Type","application/json");
+                String contentType = "application/json";
+                conn.setRequestProperty("Content-Type",contentType);
                 if(requestProperty != null){
                     Set iter = requestProperty.keySet();
                     for(Object key : iter){
+                        String k = (String) key;
+                        if(k.equalsIgnoreCase("Content-Type")){
+                            contentType = (String) requestProperty.get(key);
+                        }
                         conn.setRequestProperty((String) key, (String) requestProperty.get(key));
                     }
                 }
                 conn.setDoOutput(true);
                 conn.setUseCaches(false);
                 conn.setDefaultUseCaches(false);
-                String jsonInString = new ObjectMapper()
-                        .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                        .writeValueAsString(param.getEtcParam());
+                String jsonInString;
+                if(contentType.equalsIgnoreCase("application/json")){
+                    jsonInString = new ObjectMapper()
+                            .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                            .writeValueAsString(param.getEtcParam());
+                }else{
+                    jsonInString = getParamsString(param.getEtcParam());
+                }
                 IOUtils.copy(IOUtils.toInputStream(jsonInString, "UTF-8"), conn.getOutputStream());
             }
             int responseCode = conn.getResponseCode();
@@ -202,5 +214,18 @@ public class CallHelper {
             }
         }
     }
+    public String getParamsString(Map<String, Object> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
 
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            if (result.length() != 0) {
+                result.append("&");
+            }
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue().toString(), "UTF-8"));
+        }
+
+        return result.toString();
+    }
 }
