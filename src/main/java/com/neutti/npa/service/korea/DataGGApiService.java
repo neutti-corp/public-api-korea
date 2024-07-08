@@ -29,6 +29,10 @@ public class DataGGApiService<T> implements NService {
 
     }
     @Override
+    public void addRequestProperty(String key, String value) {
+
+    }
+    @Override
     public void setRequestMethod(String requestMethod) throws NpaException {
 
     }

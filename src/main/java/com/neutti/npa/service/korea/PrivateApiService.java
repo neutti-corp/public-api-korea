@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Slf4j
@@ -23,7 +25,11 @@ public class PrivateApiService<T> implements NService<T> {
     private TypeReference<T> itemTypeRef;
     private NParamVO param;
     private String requestMethod;
-
+    private Map requestProperty = new HashMap<>();
+    @Override
+    public void addRequestProperty(String key, String value) {
+        requestProperty.put(key,value);
+    }
     @Override
     public void setDataPath(String path) throws NpaException {
         if(path.startsWith("http://") || path.startsWith("https://")){
@@ -53,7 +59,7 @@ public class PrivateApiService<T> implements NService<T> {
     public NResultVO<T> response(NParamVO param) {
         CallHelper call = new CallHelper();
         param.setServiceKey(serviceKey);
-        NResultVO<T> r = call.loadItem(null, path, requestMethod, param, itemTypeRef);
+        NResultVO<T> r = call.loadItem(null, path, requestMethod, param, itemTypeRef, requestProperty);
         return r;
     }
 }

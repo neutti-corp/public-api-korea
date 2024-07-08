@@ -22,4 +22,17 @@ public class SampleTest {
         log.info(r.getRequestUrl().toString());
         log.info(r.getData().toString());
     }
+
+    @Test
+    public void getRTMSDataSvcAptTradeDev2() throws NpaException {
+        NService service = NServiceFactory.getPrivateService();
+        service.setDataPath("https://rawris-am.ekr.or.kr/wrms/query/json?qid=rawris.wrms.gis.popup.view_info_reservoir&db_type=undefined");
+        service.setRequestMethod("POST");
+        service.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        NParamVO param = new NParamVO();
+        param.add("equip_no", "950");
+        NResultVO r = service.response(param);
+        log.info(r.getRequestUrl().toString());
+        log.info(r.getData().toString());
+    }
 }

@@ -19,6 +19,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Slf4j
 public class CallHelper {
@@ -91,8 +93,10 @@ public class CallHelper {
             }
         }
     }
-
     public <T> NResultVO<T> loadItem(NHostType type, String path, String requestMethod, NParamVO param, TypeReference<T> typeRef) {
+        return loadItem(type, path, requestMethod, param, typeRef, null);
+    }
+    public <T> NResultVO<T> loadItem(NHostType type, String path, String requestMethod, NParamVO param, TypeReference<T> typeRef, Map requestProperty) {
         if(typeRef == null) {
             log.warn("DataTypeRef 이 선언이 안 되있을 경우 항목(Data) 객체는 Map 형태로 변환됩니다.");
         }
@@ -113,6 +117,12 @@ public class CallHelper {
                 //conn.setInstanceFollowRedirects(false);
             }else{
                 conn.setRequestProperty("Content-Type","application/json");
+                if(requestProperty != null){
+                    Set iter = requestProperty.keySet();
+                    for(Object key : iter){
+                        conn.setRequestProperty((String) key, (String) requestProperty.get(key));
+                    }
+                }
                 conn.setDoOutput(true);
                 conn.setUseCaches(false);
                 conn.setDefaultUseCaches(false);
