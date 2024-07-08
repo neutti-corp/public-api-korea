@@ -87,6 +87,7 @@ public class SampleTest {
         NService<SensorVO> service = NServiceFactory.getPrivateService();
         service.setDataPath(/* http 또는 https 로 시작하는 full url */);
         service.setRequestMethod("POST");
+        service.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         service.setDataTypeRef(new TypeReference<SensorVO>() {});
         NParamVO param = new NParamVO();
         param.add("mea_date_start", "2023-07-24");
