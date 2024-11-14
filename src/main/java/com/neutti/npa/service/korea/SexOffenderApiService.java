@@ -3,9 +3,12 @@ package com.neutti.npa.service.korea;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.*;
 import com.neutti.npa.helper.CallHelper;
+import com.neutti.npa.vo.WmsVO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -47,6 +50,11 @@ public class SexOffenderApiService<T> implements NService<T> {
     @Override
     public void setDataTypeRef(TypeReference<T> dataTypeRef) {
         setItemTypeRef(dataTypeRef);
+    }
+
+    @Override
+    public BufferedImage getWmsImage(WmsVO param) {
+        return null;
     }
 
 

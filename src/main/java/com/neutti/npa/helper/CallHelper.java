@@ -10,13 +10,19 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.neutti.npa.NHostType;
 import com.neutti.npa.NParamVO;
 import com.neutti.npa.NResultVO;
+import com.neutti.npa.vo.WmsVO;
 import com.neutti.npa.vo.data_go.DataResponseVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -191,4 +197,58 @@ public class CallHelper {
         }
     }
 
+    public BufferedImage getBufferedImage(NHostType type, String path, String requestMethod, String serviceKey, WmsVO param) {
+        UrlHelper urlHelper = new UrlHelper();
+        String host = urlHelper.findHost(type);
+        HttpURLConnection conn = null;
+        try {
+            String urlStr = "https://" + host + path + "?serviceKey=" + URLEncoder.encode(serviceKey,"utf-8");
+            if(param.getLayers() != null){
+                urlStr += "&layers=" + param.getLayers();
+            }
+            if(param.getSrs() != null){
+                urlStr += "&srs=" + param.getSrs();
+            }
+            if(param.getBbox() != null){
+                urlStr += "&bbox=" + param.getBbox();
+            }
+            if(param.getWidth() != null){
+                urlStr += "&width=" + param.getWidth();
+            }
+            if(param.getHeight() != null){
+                urlStr += "&height=" + param.getHeight();
+            }
+            if(param.getFormat() != null){
+                urlStr += "&format=" + param.getFormat();
+            }
+            if(param.getTransparent() != null){
+                urlStr += "&transparent=" + param.getTransparent();
+            }
+            if(param.getBgcolor() != null){
+                urlStr += "&bgcolor=" + param.getBgcolor();
+            }
+            if(param.getExceptions() != null){
+                urlStr += "&exceptions=" + param.getExceptions();
+            }
+            URL url = new URL(urlStr);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod(requestMethod);
+            conn.setInstanceFollowRedirects(false);
+            int responseCode = conn.getResponseCode();
+            if (responseCode >= 200 && responseCode <= 300) {
+                InputStream r = conn.getInputStream();
+                return ImageIO.read(r);
+            } else {
+                log.error(urlStr);
+                return null;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return null;
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+    }
 }

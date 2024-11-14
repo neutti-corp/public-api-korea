@@ -4,8 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.NService;
 import com.neutti.npa.NParamVO;
 import com.neutti.npa.NpaException;
+import com.neutti.npa.vo.WmsVO;
 import com.neutti.npa.vo.data_go.DataResponseVO;
 
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -33,6 +36,10 @@ public class DataSeoulApiService implements NService {
 
     }
 
+    @Override
+    public BufferedImage getWmsImage(WmsVO param) {
+        return null;
+    }
     @Override
     public DataResponseVO response(NParamVO param) {
         return null;

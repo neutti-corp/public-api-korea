@@ -89,4 +89,33 @@ public class UrlHelper {
             }
         }
     }
+
+    public String findHost(NHostType type) {
+        String targertUrl = null;
+        switch (type){
+            case DATA_GO:   /* 공공데이터 포털 */
+                targertUrl = "apis.data.go.kr";
+                break;
+            case EXIM:
+                targertUrl = "www.koreaexim.go.kr";
+                break;
+            case SEX_OFFENDER:
+                targertUrl = "api.sexoffender.go.kr";
+                break;
+            case KOBIS:
+                targertUrl = "www.kobis.or.kr";
+                break;
+            case MOLIT:
+                targertUrl = "openapi.molit.go.kr";
+                break;
+            case DATA_GG:
+                break;
+            case DATA_SEOUL:
+                break;
+            case VWORLD:
+
+                break;
+        }
+        return targertUrl;
+    }
 }

@@ -3,11 +3,17 @@ package com.neutti.npa;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neutti.npa.external.B552657.AedInfo;
 import com.neutti.npa.external.M15057511.RTMSData;
-import com.neutti.npa.vo.data_go.DataResponseVO;
+import com.neutti.npa.vo.WmsVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -126,4 +132,40 @@ public class NpaTest {
 
     }
 
+    /**
+     *
+     */
+    @Test
+    public void test10() throws NpaException, IOException {
+        NService service = NServiceFactory.getService(NHostType.DATA_GO);
+        service.setDataPath("/B553084/ecoapi/EcologyzmpService/wms/getEcologyzmpWMS");
+        service.setCertKey("uNv/f+F4gnIwp9xLSlXd5Mdt/zPHTM2nOuzjmEhfr7Qcx1zgTXxztte950Z4K91I1IMVj1s2Nond0m3vppGSiw==");
+        WmsVO param = new WmsVO();
+        param.setLayers("tbl_opn_eczm");
+        param.setSrs("EPSG:5186");
+        param.setBbox("210092.22524226015,587778.2997109308,277821.23446882307,612686.7957937511");
+        param.setWidth(3291);
+        param.setHeight(1201);
+        param.setFormat("png");
+        param.setTransparent(false);
+        param.setBgcolor("0xFF0000");
+        param.setExceptions("BLANK");
+        BufferedImage r = service.getWmsImage(param);
+        File outputfile = new File("image1.png");
+        ImageIO.write(r, "png", outputfile);
+    }
+    @Test
+    public void test11() throws NpaException, IOException {
+        NService service = NServiceFactory.getService(NHostType.DATA_GO);
+        service.setDataPath("/1192000/apVhdService_Opz/getOpnOpzWMS");
+        service.setCertKey("uNv/f+F4gnIwp9xLSlXd5Mdt/zPHTM2nOuzjmEhfr7Qcx1zgTXxztte950Z4K91I1IMVj1s2Nond0m3vppGSiw==");
+        WmsVO param = new WmsVO();
+        param.setSrs("EPSG:5179");
+        param.setBbox("718918.25,1433106.875,1249928.75,2071446.875");
+        param.setWidth(768);
+        param.setHeight(654);
+        BufferedImage r = service.getWmsImage(param);
+        File outputfile = new File("image2.png");
+        ImageIO.write(r, "png", outputfile);
+    }
 }

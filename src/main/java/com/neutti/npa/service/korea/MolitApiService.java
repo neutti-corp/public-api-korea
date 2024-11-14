@@ -6,10 +6,13 @@ import com.neutti.npa.helper.CallHelper;
 import com.neutti.npa.NService;
 import com.neutti.npa.NHostType;
 import com.neutti.npa.NParamVO;
+import com.neutti.npa.vo.WmsVO;
 import com.neutti.npa.vo.data_go.DataResponseVO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -50,6 +53,12 @@ public class MolitApiService<T> implements NService<T> {
     public void setDataTypeRef(TypeReference<T> dataTypeRef) {
         setItemTypeRef(dataTypeRef);
     }
+
+    @Override
+    public BufferedImage getWmsImage(WmsVO param) {
+        return null;
+    }
+
     @Override
     public DataResponseVO<T> response(NParamVO param) {
         CallHelper call = new CallHelper();
