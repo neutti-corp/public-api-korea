@@ -37,6 +37,11 @@ public class DataApiService<T> implements NService<T> {
     }
 
     @Override
+    public void addRequestProperty(String key, String value) {
+
+    }
+
+    @Override
     public void setDataPath(String path) {
         setPath(path);
     }

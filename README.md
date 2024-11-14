@@ -9,7 +9,7 @@ http://npacode.com
 <dependency>
     <groupId>com.neutti.npa</groupId>
     <artifactId>npa-korea</artifactId>
-    <version>0.1.6</version>
+    <version>0.1.9</version>
 </dependency>
 ```
 ###### When logback library crashes - 라이브러리 충돌시
@@ -18,7 +18,7 @@ Caused by: java.lang.IllegalArgumentException: LoggerFactory is not a Logback Lo
 <dependency>
     <groupId>com.neutti.npa</groupId>
     <artifactId>npa-korea</artifactId>
-    <version>0.1.6</version>
+    <version>0.1.9</version>
     <exclusions>
         <exclusion>
             <groupId>ch.qos.logback</groupId>
@@ -29,11 +29,11 @@ Caused by: java.lang.IllegalArgumentException: LoggerFactory is not a Logback Lo
 ```
 
 ### gradle
-    implementation 'com.neutti.npa:npa-korea:0.1.6'
+    implementation 'com.neutti.npa:npa-korea:0.1.7'
     
     or
     
-    implementation ('com.neutti.npa:npa-korea:0.1.6') {
+    implementation ('com.neutti.npa:npa-korea:0.1.7') {
         exclude group: "ch.qos.logback", module: "logback-classic"
     }
 
@@ -87,6 +87,7 @@ public class SampleTest {
         NService<SensorVO> service = NServiceFactory.getPrivateService();
         service.setDataPath(/* http 또는 https 로 시작하는 full url */);
         service.setRequestMethod("POST");
+        service.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         service.setDataTypeRef(new TypeReference<SensorVO>() {});
         NParamVO param = new NParamVO();
         param.add("mea_date_start", "2023-07-24");

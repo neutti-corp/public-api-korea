@@ -4,7 +4,7 @@
     <description>could use public data in Korea more conveniently</description>
     <groupId>com.neutti.npa</groupId>
     <artifactId>npa-korea</artifactId>
-    <version>0.1.6</version>
+    <version>0.1.9</version>
     <packaging>jar</packaging>
 
     <developers>
@@ -28,8 +28,9 @@
 
     <licenses>
         <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>The MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 

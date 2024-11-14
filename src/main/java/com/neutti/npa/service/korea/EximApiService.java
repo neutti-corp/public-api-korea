@@ -24,7 +24,10 @@ public class EximApiService<T> implements NService<T> {
     private String serviceKey;
     private TypeReference<T> itemTypeRef;
     private NParamVO param;
+    @Override
+    public void addRequestProperty(String key, String value) {
 
+    }
     @Override
     public void setDataPath(String path) {
 setPath(path);

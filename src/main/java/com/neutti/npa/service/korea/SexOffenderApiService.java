@@ -28,7 +28,10 @@ public class SexOffenderApiService<T> implements NService<T> {
     private String serviceKey;
     private TypeReference<T> itemTypeRef;
     private NParamVO param;
+    @Override
+    public void addRequestProperty(String key, String value) {
 
+    }
     @Override
     public void setRequestMethod(String requestMethod) throws NpaException {
 
